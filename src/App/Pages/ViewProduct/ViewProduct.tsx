@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../Admin/Tab/Products/ProductApi";
 import StarRating from "../../../@All/Component/StarRating/StarRating ";
