@@ -1,5 +1,6 @@
 import BreadCrumbs from "../Breadcrumb/BreadCrumbs";
 import BreadcrumbSEO from "../Breadcrumb/Utils/BreadCurmbSEO";
+import ComingSoon from "../ComingSoon/ComingSoon";
 import Navbar from "../NAVbar/Navbar";
 import { Outlet } from "react-router-dom";
 
@@ -10,10 +11,11 @@ const Layout = () => {
          <Navbar />
    
      
-
+         
       <div className="md:pt-28 pt-20 ">
         <BreadcrumbSEO />
         <BreadCrumbs />
+        
         <Outlet />
       </div>
     </>

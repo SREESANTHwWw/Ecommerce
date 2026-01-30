@@ -53,6 +53,7 @@ function App() {
             <Route path="/registerotp" element={<RegisterOtp />} />
             <Route path="/terms&conditions" element={<TermsPage />} />
             <Route path="/groviya" element={<IntroPage />} />
+            <Route path="/about" element={<ComingSoon/>}/>
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             <Route

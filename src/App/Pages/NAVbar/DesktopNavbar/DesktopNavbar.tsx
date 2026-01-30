@@ -8,7 +8,6 @@ import { FaUserCircle } from "react-icons/fa";
 import AccountdropDown from "../../Account/AccountDropDown/AccountdropDown";
 import CartButton from "../CartButton";
 
-
 const DesktopNavbar = ({
   setSearchTab,
   showDropdown,
@@ -25,13 +24,12 @@ const DesktopNavbar = ({
       animate={{ y: showNavbar ? 0 : -112 }}
       className="fixed top-0 w-full z-50 h-28 grid grid-cols-3 bg-gradient-to-b from-[var(--gradNav)] to-[var(--main-bg-color)] items-center px-10 shadow-xl"
     >
-
-      
-        <div className="px-20">
-              {/* <img src={logo} alt="" className="w-32 h-32 object-cover" /> */}
-<Typography className="text-3xl font-bold text-[var(--main-web-color-2)]">Groviya</Typography>
-        </div>
-      
+      <div className="px-20">
+        {/* <img src={logo} alt="" className="w-32 h-32 object-cover" /> */}
+        <Typography className="text-3xl font-bold text-[var(--main-web-color-2)]">
+          Groviya
+        </Typography>
+      </div>
 
       <div className="flex justify-center gap-10">
         <button onClick={() => navigate("/")} className="cursor-pointer">
@@ -45,7 +43,9 @@ const DesktopNavbar = ({
             ShopAll
           </Typography>
         </button>
-        <button className="cursor-pointer">
+        <button 
+         onClick={() => navigate("/about")}
+        className="cursor-pointer">
           <Typography className="text-[var(--main-web-color)] text-md">
             About
           </Typography>
@@ -60,21 +60,31 @@ const DesktopNavbar = ({
           />
         </button>
 
-    { token &&   <div
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
-          className="relative cursor-pointer"
-        >
-          <FaUserCircle  className="cursor-pointer hover:text-[var(--bg-color-ca)] text-[var(--main-web-color)]" size={30} />
-          <AnimatePresence>
-            {showDropdown && <AccountdropDown />}
-          </AnimatePresence>
-        </div>}
+        {token && (
+          <div
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+            className="relative cursor-pointer"
+          >
+            <FaUserCircle
+              className="cursor-pointer hover:text-[var(--bg-color-ca)] text-[var(--main-web-color)]"
+              size={30}
+            />
+            <AnimatePresence>
+              {showDropdown && <AccountdropDown />}
+            </AnimatePresence>
+          </div>
+        )}
 
-        <CartButton cartLength={cartLength} navigate={navigate} size={30}  />
-        {!token && <button 
-           className="bg-[var(--main-web-color-2)] w-20  h-9  hover:bg-[var(--main-web-color)] cursor-pointer text-white rounded-md"
-        onClick={() => navigate("/login")}>Login</button>}
+        <CartButton cartLength={cartLength} navigate={navigate} size={30} />
+        {!token && (
+          <button
+            className="bg-[var(--main-web-color-2)] w-20  h-9  hover:bg-[var(--main-web-color)] cursor-pointer text-white rounded-md"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+        )}
       </div>
     </motion.div>
   );
