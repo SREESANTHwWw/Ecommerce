@@ -1,6 +1,6 @@
 import BreadCrumbs from "../Breadcrumb/BreadCrumbs";
 import BreadcrumbSEO from "../Breadcrumb/Utils/BreadCurmbSEO";
-import ComingSoon from "../ComingSoon/ComingSoon";
+
 import Navbar from "../NAVbar/Navbar";
 import { Outlet } from "react-router-dom";
 
