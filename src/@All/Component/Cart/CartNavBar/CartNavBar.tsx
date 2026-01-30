@@ -4,7 +4,7 @@ import { Typography } from "../../../AppForm/Form";
 import { RiShieldCheckFill } from "react-icons/ri";
 
 const CartNavBar = () => {
-  const [step, setStep] = useState(2); // current step
+  const [step] = useState(2); // current step
 
   const NavDet = [
     { id: 1, title: "Cart" },

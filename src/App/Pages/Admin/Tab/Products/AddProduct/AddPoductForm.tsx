@@ -10,23 +10,23 @@ import {
 import { useForm } from "react-hook-form";
 import {
   useCreateProductMutation,
-  useGetProductByIdQuery,
+  // useGetProductByIdQuery,
 } from "../ProductApi";
 import type { ProductCreateType } from "../Types";
 import NotificationMessage from "../../../../../../@All/AppForm/NotificationMessage";
 import SpinnerLoading from "../../../../../../@All/Component/Loading/SpinnerLoading";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useGetAllCategoryQuery } from "../../AdminCategory/CategoryApi";
 
 const AddPoductForm = () => {
   const { control, handleSubmit, reset, watch, setValue } =
     useForm<ProductCreateType>();
 
-  const { productId } = useParams();
+  // const { productId } = useParams();
 
-  console.log("productId", productId);
+  // console.log("productId", productId);
   const [createProduct] = useCreateProductMutation();
-  const { data: product } = useGetProductByIdQuery(productId ?? "");
+  // const { data: product } = useGetProductByIdQuery(productId ?? "");
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState<null | any>(null);
   const { data: category } = useGetAllCategoryQuery();

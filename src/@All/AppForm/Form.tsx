@@ -123,7 +123,7 @@ export const TextController = <T extends FieldValues>({
 
 
 
-type ButtonProps<T extends FieldValues = FieldValues> = {
+type ButtonProps = {
   type: "submit" | "button" | "reset" | undefined;
   className?: string;
   children: React.ReactNode;

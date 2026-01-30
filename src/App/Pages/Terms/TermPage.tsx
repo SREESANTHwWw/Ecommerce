@@ -1,6 +1,6 @@
 // src/pages/TermsPage.tsx
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FiChevronDown, FiChevronUp, FiDownload, FiCheck } from "react-icons/fi";
 
 type Section = {
@@ -255,8 +255,3 @@ export default function TermsPage() {
   );
 }
 
-// Small helper that uses the print function for accessibility
-function handlePrint() {
-  // open print dialog; users can save as PDF from browser
-  window.print();
-}

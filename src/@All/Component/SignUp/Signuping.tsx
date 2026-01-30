@@ -3,7 +3,7 @@ import { TextController, Typography } from "../../AppForm/Form";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import {
-  useFirstNameCheckerMutation,
+
   useGoogleAuthenticationMutation,
   useSendUserotpMutation,
 } from "../Login/LoginApi";
@@ -26,7 +26,7 @@ const Signuping = () => {
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState<null | any>(null);
   const [showOtpForm, setShowOtpForm] = useState(false);
-  const [formData, setFormData] = useState<any>({});
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -20,12 +20,12 @@ type categoryType = {
 };
 
 type propsType = {
-  setNotification: (value: boolean) => void;
+ 
   onClose: () => void;
   category: categoryType[];
 };
 
-const AddCategoryForm = ({ onClose, setNotification, category }: propsType) => {
+const AddCategoryForm = ({ onClose,  category }: propsType) => {
   const { control, handleSubmit } = useForm();
   const [addCategory] = useAddCategoryMutation();
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ const onSubmit = async (data: any) => {
 
     if (res.success) {
       toast.success(res.msg);
-      setNotification(true);
+     
       onClose();
     }
   } catch (err) {

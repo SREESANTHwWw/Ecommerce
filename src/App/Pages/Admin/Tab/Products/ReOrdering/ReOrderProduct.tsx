@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useGetAllProductsQuery, useReOrderingProductMutation } from "../ProductApi";
 import {
   DndContext,
@@ -50,7 +50,7 @@ function DraggableItem({ item }: { item: any }) {
 }
 
 // Main reorder component
-const ReOrderProduct = ({ colors }: any) => {
+const ReOrderProduct = () => {
   const { data: products } = useGetAllProductsQuery();
   const [items, setItems] = useState<any[]>([]);
   const [ReOrderingProduct ] = useReOrderingProductMutation()

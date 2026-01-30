@@ -7,7 +7,7 @@ import { FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import AccountdropDown from "../../Account/AccountDropDown/AccountdropDown";
 import CartButton from "../CartButton";
-import logo from "../../../../assets/bgremoveLogo.png";
+
 
 const DesktopNavbar = ({
   setSearchTab,

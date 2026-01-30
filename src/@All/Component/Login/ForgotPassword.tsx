@@ -12,7 +12,7 @@ import SpinnerLoading from "../Loading/SpinnerLoading";
 import { motion } from "framer-motion";
 import { GrRefresh } from "react-icons/gr";
 const ForgotPassword = () => {
-  const { control, handleSubmit,getValues } = useForm({
+  const { control, handleSubmit, } = useForm({
     defaultValues: { email: "", otp: "", password: "" },
   });
 
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
   const [notification, setNotification] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
-  const email = getValues("email");
+ 
 
   const handleOTPSend = (data: any) => {
     setLoading(true);

@@ -1,6 +1,5 @@
-import React from "react";
 
-const TableView = ({colors}:any) => {
+const TableView = () => {
   const products = [
     { id: 1, name: "Wireless Mouse", price: 599, stock: 25, category: "Accessories" },
     { id: 2, name: "Mechanical Keyboard", price: 2499, stock: 12, category: "Accessories" },

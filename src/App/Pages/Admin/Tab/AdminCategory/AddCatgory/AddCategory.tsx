@@ -7,6 +7,7 @@ import {
 } from "../CategoryApi";
 import { ChevronRight, ChevronDown, Edit, Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
+import SpinnerLoading from "../../../../../../@All/Component/Loading/SpinnerLoading";
 
 type parentCategory = {
   _id: string;
@@ -75,6 +76,9 @@ const deleteCategoryFn = async (id: string) => {
     setIsloading(false);
   }
 };
+if(isLoading){
+  return <SpinnerLoading/>
+}
 
 
   return (
@@ -154,7 +158,7 @@ const deleteCategoryFn = async (id: string) => {
 
 const AddCategory = () => {
   const [cateFormOn, setCateFormon] = useState(false);
-  const [notification, setNotification] = useState<boolean>(false);
+  // const [notification, setNotification] = useState<boolean>(false);
   const { data } = useGetAllCategoryQuery();
 
   const treeData = useMemo(() => {
@@ -167,7 +171,7 @@ const AddCategory = () => {
       {cateFormOn && (
         <AddCategoryForm
           onClose={() => setCateFormon(false)}
-          setNotification={setNotification}
+          // setNotification={setNotification}
           category={data?.data || []}
         />
       )}
