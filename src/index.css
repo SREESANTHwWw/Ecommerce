@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Saira:ital,wght@0,100..900;1,100..900&family=Share+Tech&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech&display=swap");
+@import "tailwindcss";
+
+@layer utilities {
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    @apply appearance-none m-0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+:root {
+  
+ 
+
+  /* --main-web-color: #14532d;
+  --grad: #afdfbc;
+  --gradNav: #e6f6ea;
+  --main-web-color-2: #16a34a;
+  --bg-color-ca: #16a34a;
+  --main-bg-color: #f9fafb;
+  --text: #1f2937; */
+  --main-web-color: #4f1453;
+  --grad: #d6afdf;
+  --gradNav: #f5e6f6;
+  --main-web-color-2: #9516a3;
+  --bg-color-ca: #9e16a3;
+  --main-bg-color: #f9fafb;
+  --text: #1f2937;
+}
+@theme {
+  --font-Dancing: "Dancing Script", cursive;
+  --font-Share: "Share Tech", sans-serif;
+}
+@layer utilities {
+  @keyframes text-flow {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-text-flow {
+    animation: text-flow 4s linear infinite;
+  }
+
+  @keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  
+ 
+}
+ .animate-float {
+    animation: float 3s ease-in-out infinite ;
+    z-index: 0;
+  }
+
+  @keyframes zoom {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+    
+  }
+
+  .animate-zoom {
+    animation: zoom 3s ease-in-out infinite;
+  }
+
+
+  @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      
+      .animate-marquee {
+        animation: marquee 10s linear infinite;
+      }
+      
+     
+      
+      
+}
+
+
