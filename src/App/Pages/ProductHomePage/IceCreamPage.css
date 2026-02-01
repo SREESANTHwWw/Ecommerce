@@ -73,7 +73,7 @@
   padding: var(--s);
   border: var(--s) solid #0000;
   box-sizing: border-box;
-  background: #cd8c52;
+  background:  var(--grad);
   border-radius: calc(3.5 * var(--s));
   mask:
     radial-gradient(calc(sqrt(2) * var(--s)), #000 calc(100% - 1px), #0000),

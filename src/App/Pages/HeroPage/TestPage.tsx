@@ -27,7 +27,7 @@ const TestPage = () => {
               delivered cold and fresh to your doorstep.
             </Typography>
 
-            <div className="flex gap-4 pt-4">
+            <div className="flex  gap-4 pt-4">
 
               <button
                onClick={()=>navigate("/shopall")}
@@ -54,7 +54,7 @@ const TestPage = () => {
                 onLoad={() => setImageLoaded(true)}
                 src={icecream}
                 alt="Ice Cream"
-                className={`w-full md:h-[500px] h-[200px] object-cover rounded-2xl ${
+                className={`w-full md:h-[500px] h-[400px] object-cover rounded-2xl ${
                   imageLoaded ? "opacity-100" : "opacity-0"
                 }`}
               />

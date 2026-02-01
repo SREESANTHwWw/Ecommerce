@@ -12,11 +12,12 @@ const IceCreamPage = () => {
   if (isLoading) return <FilteringProductSkeleton />;
   if (!products?.products?.length) return <div>No products found</div>;
 
-  const sliced = products.products[0];
+  const lastItem = products.products[products.products.length - 1];
+
 
   return (
     <div className="icecream-wrapper min-h-screen flex items-center justify-center px-10 relative overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center gap-16 max-w-6xl w-full z-10">
+      <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl w-full z-10">
 
         {/* LEFT IMAGE */}
         <motion.div
@@ -27,9 +28,9 @@ const IceCreamPage = () => {
         >
           <div className="wavy-box">
             <CommonImage
-              src={sliced?.productImage?.[0]}
-              alt={sliced.productName}
-              className="rounded-lg object-fill shadow-2xl"
+              src={lastItem?.productImage?.[0]}
+              alt={lastItem.productName}
+              className="rounded-lg object-fill w-full h-full shadow-2xl"
             />
           </div>
         </motion.div>
@@ -41,9 +42,9 @@ const IceCreamPage = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex-1"
         >
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3">
             <Typography className="text-4xl font-bold">
-              {sliced.productName}
+              {lastItem.productName}
             </Typography>
 
             <Typography className="text-lg text-gray-600">
@@ -53,7 +54,7 @@ const IceCreamPage = () => {
             </Typography>
 
             <button
-              onClick={() => navigate(`/viewproduct/${sliced._id}`)}
+              onClick={() => navigate(`/viewproduct/${lastItem._id}`)}
               className="w-36 h-10 bg-[var(--main-web-color)] cursor-pointer rounded-lg hover:bg-[var(--main-web-color-2)] transition"
             >
               <Typography className="text-white">Buy Now</Typography>
