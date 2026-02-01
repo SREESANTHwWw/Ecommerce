@@ -7,6 +7,7 @@ import { FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import AccountdropDown from "../../Account/AccountDropDown/AccountdropDown";
 import CartButton from "../CartButton";
+import PillNav from "./Pillnav";
 
 const DesktopNavbar = ({
   setSearchTab,
@@ -22,40 +23,40 @@ const DesktopNavbar = ({
   return (
     <motion.div
       animate={{ y: showNavbar ? 0 : -112 }}
-      className="fixed top-0 w-full z-50 h-28 grid grid-cols-3 bg-gradient-to-b from-[var(--gradNav)] to-[var(--main-bg-color)] items-center px-10 shadow-xl"
+      className="fixed top-0 w-full z-50 h-28 grid grid-cols-3 bg-[var(--main-web-color)] items-center px-10 "
     >
       <div className="px-20">
         {/* <img src={logo} alt="" className="w-32 h-32 object-cover" /> */}
-        <Typography className="text-3xl font-bold text-[var(--main-web-color-2)]">
+        <Typography className="text-3xl font-bold text-[var(--main-bg-color)]">
           Groviya
         </Typography>
       </div>
 
-      <div className="flex justify-center gap-10">
-        <button onClick={() => navigate("/")} className="cursor-pointer">
-          {" "}
-          <Typography className="text-[var(--main-web-color)] text-md">
-            Home
-          </Typography>{" "}
-        </button>
-        <button onClick={() => navigate("/shopall")} className="cursor-pointer">
-          <Typography className="text-[var(--main-web-color)] text-md">
-            ShopAll
-          </Typography>
-        </button>
-        <button 
-         onClick={() => navigate("/about")}
-        className="cursor-pointer">
-          <Typography className="text-[var(--main-web-color)] text-md">
-            About
-          </Typography>
-        </button>
+      <div className="flex justify-center w-full items-center bg-red-500 gap-10">
+      
+        <PillNav
+        items={[
+          { label: "Home", href: "/" },
+          { label: "About", href: "/about" },
+          { label: "ShopAll", href: "/shopall" },
+          { label: "Contact", href: "/contact" },
+        ]}
+        activeHref="/"
+        className="custom-nav"
+        ease="power2.easeOut"
+        baseColor="#ffffff"
+        pillColor="#ffffff"
+        hoveredPillTextColor="#4f1453"
+        pillTextColor="#000000"
+        initialLoadAnimation={true}
+      />
       </div>
+      
 
       <div className="flex items-center justify-end gap-6">
         <button onClick={() => setSearchTab(true)}>
           <FiSearch
-            className="hover:text-[var(--bg-color-ca)] text-[var(--main-web-color)] cursor-pointer "
+            className="hover:text-[var(--bg-color-ca)] text-[var(--main-bg-color)] cursor-pointer "
             size={26}
           />
         </button>
@@ -67,7 +68,7 @@ const DesktopNavbar = ({
             className="relative cursor-pointer"
           >
             <FaUserCircle
-              className="cursor-pointer hover:text-[var(--bg-color-ca)] text-[var(--main-web-color)]"
+              className="cursor-pointer hover:text-[var(--bg-color-ca)] text-[var(--main-bg-color)]"
               size={30}
             />
             <AnimatePresence>

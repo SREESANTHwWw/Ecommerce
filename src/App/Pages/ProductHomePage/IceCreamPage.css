@@ -1,0 +1,98 @@
+/* .boxOne {
+    background: var(--main-web-color);
+  -mask:
+    radial-gradient(75.32px at 50% 102.3px,#000 99%,#0000 101%) calc(50% - 132px) 0/264px 100%,
+    radial-gradient(75.32px at 50% -36.3px,#0000 99%,#000 101%) 50% 66px/264px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+} */
+
+.wavy {
+  clip-path: shape(
+    from 0 0,
+    vline to 100%,
+    curve to 13.64% calc(100% - 36px) with 9.09% calc(100% - 35px),
+    curve to 22.73% calc(100% - 20.5px) with 18.18% calc(100% - 37px),
+    curve to 31.82% calc(100% - 47px) with 27.27% calc(100% - 4px),
+    curve to 40.91% calc(100% - 103.5px) with 36.36% calc(100% - 90px),
+    curve to 50% calc(100% - 64.5px) with 45.45% calc(100% - 117px),
+    curve to 59.09% calc(100% - 48px) with 54.55% calc(100% - 12px),
+    curve to 68.18% calc(100% - 54.5px) with 63.64% calc(100% - 84px),
+    curve to 77.27% calc(100% - 24px) with 72.73% calc(100% - 25px),
+    curve to 86.36% calc(100% - 12.5px) with 81.82% calc(100% - 23px),
+    curve to 100% 100% with 90.91% calc(100% - 2px),
+    vline to 0,
+    hline to 0
+  );
+}
+
+.icecream-wrapper {
+  background: #ffffff;
+}
+
+.wavy-box {
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.wave-bottom svg {
+  display: block;
+  width: 100%;
+  height: 130px;
+}
+
+.wave-bottom svg {
+  animation: waveMove 6s ease-in-out infinite alternate;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.wavy-box {
+  --s: 20px;
+  --w: 360px;
+
+  width: round(var(--w), 4 * var(--s));
+  aspect-ratio: 1;
+  padding: var(--s);
+  border: var(--s) solid #0000;
+  box-sizing: border-box;
+  background: #cd8c52;
+  border-radius: calc(3.5 * var(--s));
+  mask:
+    radial-gradient(calc(sqrt(2) * var(--s)), #000 calc(100% - 1px), #0000),
+    conic-gradient(#000 0 0) content-box,
+    radial-gradient(calc(sqrt(2) * var(--s)), #0000 100%, #000 calc(100% + 1px))
+      var(--s) var(--s) padding-box;
+  mask-size: calc(var(--s) * 4) calc(var(--s) * 4);
+}
+
+/* .wavy-box_2 {
+    
+    padding: 30px;
+    background-color: var(--main-web-color);
+    clip-path: shape(from 0 0,vline to 100%,curve to 15% calc(100% - 36px) with 10% calc(100% - 35px),curve to 25% calc(100% - 20.5px) with 20% calc(100% - 37px),curve to 35% calc(100% - 47px) with 30% calc(100% - 4px),curve to 45% calc(100% - 103.5px) with 40% calc(100% - 90px),curve to 55% calc(100% - 64.5px) with 50% calc(100% - 117px),curve to 65% calc(100% - 48px) with 60% calc(100% - 12px),curve to 75% calc(100% - 54.5px) with 70% calc(100% - 84px),curve to 85% calc(100% - 24px) with 80% calc(100% - 25px),curve to 100% 100% with 90% calc(100% - 23px),vline to 0, hline to 0);
+} */
+  
+.wavy-box_2 {
+  padding: 30px;
+  background-color: var(--main-web-color);
+  clip-path: shape(from 0 0,curve to 18.75% 33px with 12.5% 32px,curve to 31.25% 18.5px with 25% 34px,curve to 43.75% 43px with 37.5% 3px,curve to 56.25% 95.5px with 50% 83px,curve to 68.75% 59.5px with 62.5% 108px,curve to 81.25% 44px with 75% 11px,curve to 100% 0 with 87.5% 77px,vline to 100%,curve to 81.25% calc(100% - 22px) with 87.5% calc(100% - 23px),curve to 68.75% calc(100% - 11.5px) with 75% calc(100% - 21px),curve to 56.25% calc(100% - 20.5px) with 62.5% calc(100% - 2px),curve to 43.75% calc(100% - 25px) with 50% calc(100% - 39px),curve to 31.25% calc(100% - 43px) with 37.5% calc(100% - 11px),curve to 18.75% calc(100% - 49.5px) with 25% calc(100% - 75px),curve to 0 100% with 12.5% calc(100% - 24px),vline to 0);
+}
+

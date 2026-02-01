@@ -14,7 +14,7 @@ const CartButton = ({ cartLength ,navigate ,size }:any) => (
       <div className="w-4 h-4 bg-red-800 text-white text-sm rounded-full flex items-center justify-center">
         <Typography>{cartLength}</Typography>
       </div>
-      <MdOutlineShoppingCart className=" hover:text-[var(--bg-color-ca)] text-[var(--main-web-color)]" size={size} />
+      <MdOutlineShoppingCart className=" hover:text-[var(--bg-color-ca)] text-[var(--main-bg-color)]" size={size} />
     </div>
   </button>
 );

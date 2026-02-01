@@ -4,6 +4,8 @@ import { Typography } from "../../../@All/AppForm/Form";
 
 const IceCreamFooter: React.FC = () => {
   return (
+
+
     <footer className="text-white py-10 ">
       {" "}
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between gap-10">
@@ -110,6 +112,7 @@ const IceCreamFooter: React.FC = () => {
         </Typography>
       </div>
     </footer>
+  
   );
 };
 

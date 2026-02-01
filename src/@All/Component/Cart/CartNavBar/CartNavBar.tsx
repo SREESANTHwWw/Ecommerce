@@ -1,84 +1,111 @@
-import { useState } from "react";
-import logo from "../../../../assets/bgremoveLogo.png";
-import { Typography } from "../../../AppForm/Form";
+import { motion } from "framer-motion";
 import { RiShieldCheckFill } from "react-icons/ri";
+import { FiShoppingCart, FiMapPin, FiCreditCard } from "react-icons/fi";
+import { Typography } from "../../../AppForm/Form";
+import { useNavigate } from "react-router-dom";
 
-const CartNavBar = () => {
-  const [step] = useState(2);
+type Step = "Cart" | "Address" | "Payment";
 
-  const NavDet = [
-    { id: 1, title: "Cart" },
-    { id: 2, title: "Address" },
-    { id: 3, title: "Payment" },
+const CartNavBar = ({ activeStep = "Cart" }: { activeStep?: Step }) => {
+  const navigate = useNavigate();
+
+  const steps = [
+    { title: "Cart", icon: <FiShoppingCart />, path: "/cart" },
+    { title: "Address", icon: <FiMapPin />, path: "/cart" },
+    { title: "Payment", icon: <FiCreditCard />, path: "/cart/payment" },
   ];
 
+  const activeIndex = steps.findIndex(
+    (step) => step.title === activeStep
+  );
+
+  const handleNavigate = (index: number, path: string) => {
+    if (index <= activeIndex) navigate(path);
+  };
+
   return (
-    <div className="w-full bg-gradient-to-b from-[var(--gradNav)] to-[var(--main-bg-color)]">
-      <div className="w-full px-4 py-3">
+    <div className="sticky top-0 z-50 backdrop-blur-lg bg-[var(--main-web-color)]/80 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
 
+          {/* Logo */}
+          <Typography className="text-2xl md:flex hidden font-extrabold text-white">
+            Groviya
+          </Typography>
 
-        <div className="flex items-center justify-between md:grid md:grid-cols-3 gap-4">
+          {/* Steps */}
+          <div className="flex  flex-1 justify-center">
+             <div className="flex  flex-col items-center gap-2">
+                <Typography className="text-2xl md:hidden flex  font-extrabold text-white">
+            Groviya
+          </Typography>
+            <div className="flex items-center gap-4">
+             
+             
+              
+              {steps.map((step, index) => {
+                const isCompleted = index < activeIndex;
+                const isActive = index === activeIndex;
+                const isClickable = index <= activeIndex;
 
-    
-          <div className="flex justify-center md:justify-start">
-            <img
-              src={logo}
-              alt="logo"
-              className="w-16 h-16 md:w-24 md:h-24 object-contain"
-            />
-          </div>
-
-      
-          <div className="flex items-center justify-between w-full md:col-span-1">
-            {NavDet.map((item, index) => (
-              <div key={item.id} className="flex items-center w-full">
-
-           
-                <Typography
-                  className={`text-xs md:text-sm font-medium tracking-wide
-                    ${
-                      step >= item.id
-                        ? "text-[var(--main-web-color-2)]"
-                        : "text-gray-400"
+                return (
+                  <div
+                    key={step.title}
+                    className={`flex items-center gap-2 ${
+                      isClickable ? "cursor-pointer" : "cursor-not-allowed"
                     }`}
-                >
-                  {item.title}
-                </Typography>
-
-        
-                {index !== NavDet.length - 1 && (
-                  <div className="flex-1 h-1 mx-2 bg-gray-300 rounded">
-                    <div
-                      className={`h-full rounded transition-all duration-300
+                    onClick={() => handleNavigate(index, step.path)}
+                  >
+                    <motion.div
+                      className={`flex items-center justify-center w-9 h-9 rounded-full border
                         ${
-                          step > item.id
-                            ? "bg-[var(--main-web-color-2)] w-full"
-                            : "w-0"
+                          isCompleted
+                            ? "bg-emerald-500 text-white border-emerald-500"
+                            : isActive
+                            ? "bg-white text-[var(--main-web-color)] border-white"
+                            : "border-white/40 text-white/60"
                         }`}
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                      whileHover={isClickable ? { scale: 1.15 } : {}}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {step.icon}
+                    </motion.div>
 
-          
-          <div className="hidden md:flex justify-end">
-            <div className="flex items-center gap-2">
-              <RiShieldCheckFill size={28} className="text-teal-500" />
-              <Typography className="text-gray-500 tracking-wider text-sm">
-                100% Secure
-              </Typography>
+                    <Typography
+                      className={`hidden sm:block text-sm font-medium ${
+                        isCompleted || isActive
+                          ? "text-white"
+                          : "text-white/60"
+                      }`}
+                    >
+                      {step.title}
+                    </Typography>
+
+                    {index !== steps.length - 1 && (
+                      <div
+                        className={`w-8 h-[2px] ${
+                          index < activeIndex
+                            ? "bg-emerald-500"
+                            : "bg-white/30"
+                        }`}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
             </div>
           </div>
 
-        </div>
+          {/* Secure */}
+          <div className="hidden md:flex items-center gap-2">
+            <RiShieldCheckFill className="text-emerald-400" size={26} />
+            <Typography className="text-xs text-white">
+              100% Secure Checkout
+            </Typography>
+          </div>
 
-        
-        <div className="flex md:hidden justify-center mt-2">
-          <RiShieldCheckFill size={22} className="text-teal-500" />
         </div>
-
       </div>
     </div>
   );

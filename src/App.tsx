@@ -22,6 +22,8 @@ const Cart = lazy(() => import("./@All/Component/Cart/Cart"));
 import AdminProtectedRoute from "./@All/ProtectedRoute/ProtectedRoute";
 const ViewProduct = lazy(()=> import("./App/Pages/ViewProduct/ViewProduct"))
 import ComingSoon from "./App/Pages/ComingSoon/ComingSoon";
+import CartLayout from "./@All/Component/Cart/CartLayout/CartLayout";
+import CartCheckoutPage from "./@All/Component/Cart/CartPayment/CheckOut/CartCheckoutPage";
 
 function App() {
   return (
@@ -48,8 +50,14 @@ function App() {
                 <Route path="delete" element={<ComingSoon/>}/>
               </Route>
             </Route>
+            
+  <Route path="/cart" element={<CartLayout />}>
+    <Route index element={<Cart />} />
+    <Route path="checkout" element={<CartCheckoutPage />} />
+  </Route>
 
-            <Route path="/cart" element={<Cart />} />
+
+           
             <Route path="/registerotp" element={<RegisterOtp />} />
             <Route path="/terms&conditions" element={<TermsPage />} />
             <Route path="/groviya" element={<IntroPage />} />

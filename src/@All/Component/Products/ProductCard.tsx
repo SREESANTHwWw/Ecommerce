@@ -6,7 +6,7 @@ import { formatNumber } from "../../Functions/FormatNumber";
 import AddtoCartButton from "../CommonButtons/AddtoCartButton";
 import TextLoadingRound from "../Loading/TextLoadingRound";
 import { useGetAllProductsQuery } from "../../../App/Pages/Admin/Tab/Products/ProductApi";
-
+import "../../../App.css"
 
 const ProductCard = () => {
 
@@ -17,7 +17,8 @@ const ProductCard = () => {
    const sliced = products?.products.slice(0,8)
 
   return (
-    <div className="flex flex-col justify-center gap-10  items-center p-2 w-full mt-10">
+    
+    <div className="flex flex-col justify-center gap-10  items-center p-2 w-full ">
 
        <div className="p-6">
         <Typography className="text-3xl font-bold">Fast Moving Products</Typography>
@@ -74,6 +75,7 @@ const ProductCard = () => {
        </div>
    
     </div>
+    
   );
 };
 

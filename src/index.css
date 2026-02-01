@@ -16,6 +16,11 @@
   }
 }
 
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
 :root {
   
  
@@ -32,7 +37,7 @@
   --gradNav: #f5e6f6;
   --main-web-color-2: #9516a3;
   --bg-color-ca: #9e16a3;
-  --main-bg-color: #f9fafb;
+  --main-bg-color: #fbf9fb;
   --text: #1f2937;
 }
 @theme {

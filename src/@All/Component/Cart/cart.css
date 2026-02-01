@@ -1,0 +1,12 @@
+/* HTML: <div class="slanted-edge"></div> */
+.slanted-edge {
+  --p: 70px; /* control the shape (can be percentage) */
+ 
+  aspect-ratio: 1;
+  clip-path: polygon(0 var(--p),100% 0,100% 100%,0 100%);
+  background: var(--main-web-color);
+}
+.wavy {
+   background: var(--main-web-color);
+  clip-path: shape(from 0 0,vline to 100%,curve to 15% calc(100% - 33px) with 10% calc(100% - 32px),curve to 25% calc(100% - 18.5px) with 20% calc(100% - 34px),curve to 35% calc(100% - 43px) with 30% calc(100% - 3px),curve to 45% calc(100% - 95.5px) with 40% calc(100% - 83px),curve to 55% calc(100% - 59.5px) with 50% calc(100% - 108px),curve to 65% calc(100% - 44px) with 60% calc(100% - 11px),curve to 75% calc(100% - 50px) with 70% calc(100% - 77px),curve to 85% calc(100% - 22px) with 80% calc(100% - 23px),curve to 100% 100% with 90% calc(100% - 21px),vline to 0, hline to 0);
+}

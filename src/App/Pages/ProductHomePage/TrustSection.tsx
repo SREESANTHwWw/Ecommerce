@@ -28,7 +28,7 @@ const trustItems = [
 const TrustSection: React.FC = () => {
   return (
     <div className="w-full  py-10">
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto px-4  grid grid-cols-2 md:grid-cols-4 gap-6">
         {trustItems.map((item, index) => (
           <div
             key={index}

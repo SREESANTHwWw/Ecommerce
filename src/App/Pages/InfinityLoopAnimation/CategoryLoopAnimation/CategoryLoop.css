@@ -1,11 +1,11 @@
-/* Wrapper */
+
 .category-wrapper {
   width: 100%;
   padding: 2rem 0;
-  
+ 
 }
 
-/* Header */
+
 .category-header {
   padding: 0 5rem;
   margin-bottom: 1rem;
@@ -65,7 +65,12 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  corner-shape: squircle;
   margin-bottom: 0.6rem;
+ 
+
 }
 
 /* Name */

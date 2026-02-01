@@ -1,0 +1,10 @@
+/* .boxOne {
+    background: var(--main-web-color);
+  --mask:
+    radial-gradient(76.25px at 50% 106.75px,#000 99%,#0000 101%) calc(50% - 122px) 0/244px 51% repeat-x,
+    radial-gradient(76.25px at 50% -45.75px,#0000 99%,#000 101%) 50% 61px/244px calc(51% - 61px) repeat-x,
+    radial-gradient(76.25px at 50% calc(100% - 106.75px),#000 99%,#0000 101%) calc(50% - 122px) 100%/244px 51% repeat-x,
+    radial-gradient(76.25px at 50% calc(100% + 45.75px),#0000 99%,#000 101%) 50% calc(100% - 61px)/244px calc(51% - 61px) repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+} */
