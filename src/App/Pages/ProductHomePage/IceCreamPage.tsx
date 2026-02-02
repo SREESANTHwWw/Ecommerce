@@ -19,7 +19,7 @@ const IceCreamPage = () => {
 
 
   return (
-    <div className="icecream-wrapper min-h-screen flex items-center justify-center px-10 relative overflow-hidden">
+    <div className="wavy-box_2 min-h-screen flex items-center justify-center px-10 relative overflow-hidden">
       <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl w-full z-10">
 
         {/* LEFT IMAGE */}
@@ -56,9 +56,9 @@ const IceCreamPage = () => {
 
             <button
               onClick={() => navigate(`/viewproduct/${lastItem._id}`)}
-              className="w-36 h-10 bg-[var(--main-web-color)] cursor-pointer rounded-lg hover:bg-[var(--main-web-color-2)] transition"
+              className="w-36 h-10 bg-[var(--main-bg-color)] cursor-pointer rounded-lg text-[var(--main-web-color)] hover:text-[var(--main-bg-color)]  hover:bg-[var(--main-web-color-2)] transition"
             >
-              <Typography className="text-white">Buy Now</Typography>
+              <Typography className="">Buy Now</Typography>
             </button>
           </div>
         </motion.div>

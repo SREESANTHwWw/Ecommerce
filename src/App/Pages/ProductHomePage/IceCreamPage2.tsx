@@ -35,7 +35,7 @@ const IceCreamPage2 = () => {
   const sliced = products.products.slice(1, 4);
 
   return (
-    <div className="wavy-box_2">
+    <div className="">
       <div className="min-h-screen flex items-center justify-center px-6 md:px-10">
         <div className="max-w-6xl w-full">
        

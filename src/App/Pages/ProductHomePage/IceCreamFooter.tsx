@@ -92,7 +92,7 @@ const IceCreamFooter: React.FC = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="p-2 rounded border border-gray-300 flex-1 focus:outline-none focus:ring-2 focus:ring-pink-300 text-black"
+              className="p-2 rounded border border-gray-300 flex-1 placeholder:text-white focus:outline-none focus:ring-2  text-white"
             />
             <button
               type="submit"

@@ -3,50 +3,40 @@ import { Typography } from "../../../../../@All/AppForm/Form";
 import { FaBoxOpen } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FcCancel } from "react-icons/fc";
-import { FiShoppingBag } from "react-icons/fi";
+import { FiShoppingBag, FiChevronRight } from "react-icons/fi"; 
 import { useNavigate } from "react-router-dom";
 
-
-const OrderDisplay = ({Orders}:any) => {
-    
-    const lengthofOrders = Orders?.length || 0;
-
-  const orderCards = [
-  { title: "Orders", count:lengthofOrders , icon: FaBoxOpen, path: "/account/orders" },
-  {
-    title: "Delivery",
-    count: 0,
-    icon: TbTruckDelivery,
-    path: "/account/orders?status=delivery",
-  },
-  {
-    title: "Cancelled",
-    count: 0,
-    icon: FcCancel,
-    path: "/account/orders?status=cancelled",
-  },
-  { title: "Recent", count: 0, icon: FiShoppingBag, path: "/account/orders" },
-];
-
+const OrderDisplay = () => {
   const navigate = useNavigate();
 
+  const quickLinks = [
+    { title: "My Orders", icon: FaBoxOpen, path: "/account/orders" },
+    { title: "Track Delivery", icon: TbTruckDelivery, path: "/account/orders?status=delivery" },
+    { title: "Cancelled Orders", icon: FcCancel, path: "/account/orders?status=cancelled" },
+    { title: "Order History", icon: FiShoppingBag, path: "/account/orders" },
+  ];
+
   return (
-    <div className="grid md:grid-cols-4 grid-cols-2 gap-4 mt-6">
-      {orderCards.map(({ title, count, icon: Icon, path }, i) => (
+    <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-6">
+      {quickLinks.map(({ title, icon: Icon, path }, i) => (
         <motion.button
           key={title}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1 }}
-          whileHover={{ y: -6 }}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.05 }}
+          whileHover={{ x: 5 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => navigate(path)}
-          className="bg-white rounded-2xl p-5 shadow  group"
+          className="flex cursor-pointer items-center justify-between bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-[var(--main-web-color)] transition-colors group"
         >
-          <div className="flex flex-col items-center space-y-2">
-            <Icon className="text-4xl text-[var(--main-web-color)] group-hover:scale-110 transition" />
-            <Typography className="font-medium">{title}</Typography>
-            <Typography className="text-xl font-bold">{count}</Typography>
+          <div className="flex items-center space-x-4">
+            <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-orange-50 transition-colors">
+              <Icon className="text-2xl text-[var(--main-web-color)]" />
+            </div>
+            <Typography className="font-semibold text-gray-700">{title}</Typography>
           </div>
+          
+          <FiChevronRight className="text-gray-400 group-hover:text-[var(--main-web-color)] transition-all transform group-hover:translate-x-1" />
         </motion.button>
       ))}
     </div>

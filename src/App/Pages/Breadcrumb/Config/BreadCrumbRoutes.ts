@@ -9,6 +9,8 @@ export const breadCrumbsRoute: BreadCrumbType[] = [
   { path: "/account", label: "Account" },
   { path: "/account/overview", label: "Overview" },
   { path: "/account/orders", label: "Orders" },
+  { path: "/account/profile", label: "Profile" },
+  { path: "/account/address", label: "Address" },
   {path:"/cart" , label:"Cart"},
   {path:"/cart/checkout" , label:"Checkout"},
   {path:"/viewproduct" , label:"Product"},

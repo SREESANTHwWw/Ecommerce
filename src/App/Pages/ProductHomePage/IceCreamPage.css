@@ -27,8 +27,13 @@
 }
 
 .icecream-wrapper {
-  background: #ffffff;
+  background: var(--main-web-color);
+   clip-path: shape(from 0 100%,vline to 0,curve to 16.67% 30px with 11.11% 29px,curve to 27.78% 17px with 22.22% 31px,curve to 38.89% 38.5px with 33.33% 3px,curve to 50% 85.5px with 44.44% 74px,curve to 61.11% 53.5px with 55.56% 97px,curve to 72.22% 39.5px with 66.67% 10px,curve to 83.33% 45px with 77.78% 69px,curve to 100% 0 with 88.89% 21px,vline to 100%, hline to 0);
 }
+
+
+
+ 
 
 .wavy-box {
   padding: 10px;

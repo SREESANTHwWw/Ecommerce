@@ -1,41 +1,38 @@
 import { motion } from "framer-motion";
-import { Typography } from "../../../../@All/AppForm/Form";
+import { CommonImage, Typography } from "../../../../@All/AppForm/Form";
 import OrderDisplay from "./OrderDisplay/OrderDisplay";
-import RewardCouponDisplay from "./RewardCouponDisplay/RewardCouponDisplay";
 import { useGetMeQuery } from "../../../../@All/Component/APIs/UserApi";
-import { Mail, Sparkles, ChevronRight } from "lucide-react";
+import { Mail, Sparkles, Settings2, ShieldCheck, MapPin } from "lucide-react";
 import { useState } from "react";
 import UserEditForm from "../AccountProfile/UserEditForm";
+import { useNavigate } from "react-router-dom";
 
+import AccountResponsive from "../AccountSideBar/AccountResponsive";
 const OverView = () => {
   const { data: user, isLoading } = useGetMeQuery();
   const userdata = user?.data;
-  const Orders = userdata?.orders;
   const [userEditOpen, setUserEditOpen] = useState(false);
+  const navigate = useNavigate();
 
+  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 120,
-      },
-    },
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0 },
   };
 
   if (isLoading)
     return (
-      <div className="p-10 text-center animate-pulse">Loading Dashboard...</div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="w-12 h-12 border-4 border-[var(--main-web-color)] border-t-transparent rounded-full animate-spin" />
+      </div>
     );
 
   return (
@@ -43,7 +40,7 @@ const OverView = () => {
       variants={container}
       initial="hidden"
       animate="show"
-      className="w-full space-y-8 mt-7"
+      className="max-w-6xl mx-auto space-y-6 mt-6 pb-10"
     >
       {userEditOpen && (
         <UserEditForm
@@ -54,81 +51,97 @@ const OverView = () => {
 
       <motion.div
         variants={item}
-        className="relative overflow-hidden bg-white border border-gray-100 rounded-[2rem] p-6 shadow-xl shadow-gray-100/50"
+        className="relative bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-50 to-transparent rounded-bl-full -z-0" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--main-web-color)] opacity-[0.03] rounded-full -mr-20 -mt-20" />
 
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
-          <div className="relative">
+        <div className="relative flex flex-col md:flex-row items-center md:items-start gap-8">
+          <div className="relative group">
             <motion.div
-              whileHover={{ rotate: 5 }}
-              className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+              whileHover={{ scale: 1.02 }}
+              className="w-32 h-32 rounded-[2rem] overflow-hidden ring-4 ring-gray-50 shadow-lg"
             >
-              <img
+              <CommonImage
                 src={userdata?.avatar || "/bgremoveLogo.png"}
                 alt="Profile"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </motion.div>
-            <div className="absolute -bottom-2 -right-2 bg-[var(--main-web-color)] p-1.5 rounded-lg text-white shadow-lg">
-              <Sparkles size={14} />
+            <div className="absolute -bottom-2 -right-2 bg-white p-2 rounded-xl shadow-md border border-gray-50">
+              <Sparkles size={18} className="text-yellow-500" />
             </div>
           </div>
 
-          <div className="flex-1 text-center md:text-left">
-            <div className="flex flex-wrap justify-center md:justify-start items-baseline gap-2">
-              <Typography className="text-2xl font-black text-gray-800 tracking-tight">
-                {userdata?.firstname} {userdata?.lastname}
-              </Typography>
-              <Typography className="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded-full">
-                Active Member
-              </Typography>
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <div className="space-y-1">
+              <div className="flex flex-wrap justify-center md:justify-start items-center gap-3">
+                <Typography className="text-3xl font-black text-gray-900">
+                  {userdata?.firstname} {userdata?.lastname}
+                </Typography>
+                <span className="flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold uppercase tracking-wider rounded-lg">
+                  <ShieldCheck size={12} />
+                  Verified
+                </span>
+              </div>
+              <div className="flex flex-wrap justify-center md:justify-start gap-4 text-gray-500">
+                <div className="flex items-center gap-1.5">
+                  <Mail size={15} className="text-gray-400" />
+                  <Typography className="text-sm font-medium">
+                    {userdata?.email}
+                  </Typography>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <MapPin size={15} className="text-gray-400" />
+                  <Typography className="text-sm font-medium">
+                    Main Office
+                  </Typography>
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center justify-center md:justify-start gap-2 mt-2 text-gray-500">
-              <Mail size={14} />
-              <Typography className="text-sm font-medium">
-                {userdata?.email}
-              </Typography>
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-2">
+              <button
+                onClick={() => setUserEditOpen(true)}
+                className="flex items-center cursor-pointer gap-2 px-5 py-2.5 bg-[var(--main-web-color)] text-white rounded-xl text-sm font-semibold hover:bg-[var(--main-web-color-2)] transition-all shadow-md"
+              >
+                <Settings2 size={16} />
+                Manage Settings
+              </button>
             </div>
-          </div>
-
-          <div className="w-full md:w-auto flex justify-center md:justify-end">
-            <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setUserEditOpen(true)}
-              className="group flex items-center justify-center gap-2 px-8 py-3 bg-[var(--main-web-color)] cursor-pointer text-white rounded-2xl font-bold transition-all"
-            >
-              Edit Profile
-              <ChevronRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </motion.button>
           </div>
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <motion.div variants={item} className="lg:col-span-8">
-          <div className="bg-white rounded-[2rem] p-2 border border-gray-50 shadow-sm">
-            <OrderDisplay Orders={Orders} />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-1">
+        <div className="md:hidden flex ">
+          <AccountResponsive />
+        </div>
+        <motion.div variants={item} className="lg:col-span-8 ">
+          <div className="bg-transparent">
+            <OrderDisplay />
           </div>
         </motion.div>
 
-        <motion.div variants={item} className="lg:col-span-4">
-          <div className="h-full bg-gradient-to-b from-indigo-50 to-white rounded-[2rem] p-6 border border-indigo-100/50">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-[var(--main-web-color)] rounded-lg flex items-center justify-center text-white">
-                <Sparkles size={16} />
-              </div>
-              <h3 className="font-bold text-gray-800">Your Rewards</h3>
+        
+        <motion.div variants={item} className="lg:col-span-4 md:px-3 px-4 md:mt-0 mt-5">
+          <div className="bg-gradient-to-br from-[var(--main-web-color)] to-[var(--main-web-color-2)] rounded-[2.5rem] p-6 text-white shadow-xl relative overflow-hidden h-full min-h-[200px]">
+            <div className="flex flex-col space-y-4">
+              <Typography className="text-xl font-bold opacity-90">
+                Support Center
+              </Typography>
+              <Typography className="text-sm opacity-80 leading-relaxed">
+                Need help with your recent orders or account settings? Our team
+                is available 24/7.
+              </Typography>
+              <button
+                onClick={() => navigate("/contact")}
+                className="w-full py-3 bg-white/20 backdrop-blur-md rounded-xl cursor-pointer font-bold text-sm hover:bg-white/30 transition-all border border-white/30"
+              >
+                <Typography>Contact Support</Typography>
+              </button>
             </div>
-            <RewardCouponDisplay />
+            {/* Background Shape */}
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
           </div>
         </motion.div>
       </div>

@@ -75,7 +75,7 @@ const UserEditForm = ({ onClose, userdata }: any) => {
         <div className="bg-[var(--main-web-color)] p-8 text-white relative">
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 hover:bg-white/20 rounded-full transition-colors"
+            className="absolute top-6 cursor-pointer right-6 p-2 hover:bg-white/20 rounded-full transition-colors"
           >
             <X size={20} />
           </button>
@@ -84,7 +84,7 @@ const UserEditForm = ({ onClose, userdata }: any) => {
             <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl">
               <User size={28} />
             </div>
-            <div>
+            <div className="flex flex-col">
               <Typography className="text-2xl font-black tracking-tight">
                 Edit Profile
               </Typography>
@@ -191,7 +191,7 @@ const UserEditForm = ({ onClose, userdata }: any) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 px-4 cursor-pointer py-4 border-2 border-gray-100 text-gray-500 font-bold rounded-2xl hover:bg-gray-50 transition-all"
+                className="flex-1 px-4 w-full h-12 cursor-pointer  border-2 border-gray-100 text-gray-500 font-bold rounded-2xl hover:bg-gray-50 transition-all"
               >
                 <Typography>Cancel</Typography>
               </button>
@@ -199,16 +199,16 @@ const UserEditForm = ({ onClose, userdata }: any) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex-[2] px-4 py-4 cursor-pointer bg-[var(--main-web-color)] text-white font-bold rounded-2xl shadow-xl hover:bg-[var(--main-web-color-2)] transition-all disabled:bg-gray-400 flex items-center justify-center gap-2"
+                className="flex-[2] px-4 py-4 w-full h-12 cursor-pointer bg-[var(--main-web-color)] text-white font-bold rounded-2xl shadow-xl hover:bg-[var(--main-web-color-2)] transition-all disabled:bg-gray-400 flex items-center justify-center gap-2"
               >
                 <Typography>
                   {" "}
                   {isLoading ? (
                     <Loader2 size={20} className="animate-spin" />
                   ) : (
-                    <>
+                    <div className="flex gap-2">
                       <Save size={18} /> Save Changes
-                    </>
+                    </div>
                   )}
                 </Typography>
               </button>
