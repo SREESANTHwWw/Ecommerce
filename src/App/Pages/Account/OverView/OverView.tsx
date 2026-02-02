@@ -43,7 +43,7 @@ const OverView = () => {
       variants={container}
       initial="hidden"
       animate="show"
-      className="w-full space-y-8"
+      className="w-full space-y-8 mt-7"
     >
       {userEditOpen && (
         <UserEditForm
@@ -93,7 +93,7 @@ const OverView = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-auto">
+          <div className="w-full md:w-auto flex justify-center md:justify-end">
             <motion.button
               whileHover={{
                 scale: 1.05,

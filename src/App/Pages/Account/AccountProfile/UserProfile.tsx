@@ -72,6 +72,7 @@ const UserProfile = () => {
               <Typography className="text-gray-400 text-xs font-bold uppercase tracking-widest">Account Details</Typography>
               <div className="h-1 w-8 bg-[var(--main-web-color)] mt-1 rounded-full" />
             </div>
+            
             <motion.button
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
