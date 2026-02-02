@@ -1,13 +1,62 @@
 import { motion } from "framer-motion";
-import { Typography } from "../../../@All/AppForm/Form";
+import { TextController, Typography } from "../../../@All/AppForm/Form";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { useForm } from "react-hook-form";
+import emailjs from "emailjs-com";
+import { useRef } from "react";
+import toast from "react-hot-toast";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const ContactPage = () => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const { control, handleSubmit, reset } = useForm<ContactFormData>();
+
+  const onSubmit = () => {
+    if (!formRef.current) return;
+
+    emailjs
+      .sendForm(
+        "service_gb5ldzd",
+        "template_5j5myka",
+        formRef.current,
+        "Xr8Df2ZzKjdft0x7Z"
+      )
+      .then(() => {
+        toast.success("Message sent successfully!", {
+          style: {
+            borderRadius: "15px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        reset({
+            name: "",
+            email: "",
+            message: "",
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Failed to send message", {
+          style: {
+            borderRadius: "15px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      });
+  };
+
   return (
     <div className="w-full p-8 px-6 md:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        
-        {/* HEADER */}
+      
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -21,16 +70,13 @@ const ContactPage = () => {
           <Typography className="text-4xl md:text-5xl font-extrabold mb-4">
             Let’s Talk Ice Cream 🍦
           </Typography>
-          <Typography className="text-gray-600 text-lg  ">
+          <Typography className="text-gray-600 text-lg">
             Have a question, feedback, or craving? We’re here to help you.
-            Reach out and our team will get back to you quickly.
           </Typography>
         </motion.div>
 
-        {/* CONTENT */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
-          
-          {/* LEFT INFO */}
+         
           <motion.div
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -47,7 +93,7 @@ const ContactPage = () => {
               {
                 icon: <FiPhone size={22} />,
                 title: "Phone",
-                value: "+91 98765 43210",
+                value: "+91 9567641722",
               },
               {
                 icon: <FiMapPin size={22} />,
@@ -75,8 +121,10 @@ const ContactPage = () => {
             ))}
           </motion.div>
 
-          {/* RIGHT FORM */}
+         
           <motion.form
+            ref={formRef}
+            onSubmit={handleSubmit(onSubmit)}
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -87,30 +135,41 @@ const ContactPage = () => {
               Send Us a Message
             </Typography>
 
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full rounded-xl border border-gray-200 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            <TextController
+            type="text"
+            id="name"
+              name="name"
+              control={control}
+              rules={{ required: "Name is required" }}
+              placeholder="Sreeshanth"
             />
 
-            <input
+            <TextController
+               id="email"
+              name="email"
               type="email"
-              placeholder="Your Email"
-              className="w-full rounded-xl border border-gray-200 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400"
+              control={control}
+              rules={{ required: "Email is required" }}
+              placeholder="Sreeshanth@example.com"
             />
 
-            <textarea
-              rows={5}
-              placeholder="Your Message"
-              className="w-full rounded-xl border border-gray-200 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+            <TextController
+            id="message"
+              type="text"
+              name="message"
+              control={control}
+              rules={{ required: "Message is required" }}
+              placeholder="Tell us about your craving..."
+              className="h-32 resize-none"
             />
 
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-full bg-[var(--main-web-color)] cursor-pointer hover:bg-[var(--main-web-color-2)] text-white rounded-xl py-3 font-semibold shadow-lg"
             >
-            <Typography>Send Message</Typography>  
+              Send Message
             </motion.button>
           </motion.form>
         </div>
