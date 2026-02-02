@@ -31,7 +31,7 @@ const UserProfile = () => {
   if (isLoading) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <div className="flex justify-center items-center h-full p-4 mt-5">
+    <div className="w-full space-y-8 mt-7">
         {
         userEditOpen &&(
             <UserEditForm onClose={() => setUserEditOpen(false)} userdata={userdata} />
@@ -41,7 +41,7 @@ const UserProfile = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative w-full  bg-white/80 backdrop-blur-md border border-gray-100 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+        className="relative  bg-white/80 backdrop-blur-md border border-gray-100 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
       >
       
         <div className="md:w-1/3 bg-[var(--main-web-color)] p-8 flex flex-col items-center justify-center text-white relative">

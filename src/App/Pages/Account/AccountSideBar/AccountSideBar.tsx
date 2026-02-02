@@ -67,7 +67,7 @@ const AccountSideBar = () => {
       variants={sidebarVariants}
       initial="hidden"
       animate="visible"
-      className="w-64    shadow  bg-white  rounded p-4 space-y-6"
+      className="w-64    border-r border-gray-300  bg-white  rounded p-4 space-y-6"
     >
     
       <motion.div variants={itemVariants} className="pb-4 ">
