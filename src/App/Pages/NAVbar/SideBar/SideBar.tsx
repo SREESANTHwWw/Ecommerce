@@ -96,6 +96,7 @@ const SideBar = ({ onClose }: any) => {
           className="flex flex-col gap-1  px-4"
         >
           {[
+            { label: "Home", path: "/" },
             { label: "Account", path: "/account" },
             { label: "Shop All", path: "/shopall" },
             { label: "About", path: "/about" },

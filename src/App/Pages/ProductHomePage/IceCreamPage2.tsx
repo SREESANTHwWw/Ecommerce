@@ -1,10 +1,30 @@
-import { motion } from "framer-motion";
+import { motion, cubicBezier } from "framer-motion";
 import { CommonImage, Typography } from "../../../@All/AppForm/Form";
 import { useGetAllProductsQuery } from "../Admin/Tab/Products/ProductApi";
 import FilteringProductSkeleton from "../NAVbar/ShopAll/FilteringProduct/FilteringProductSkeleton";
-
 import { useNavigate } from "react-router-dom";
-import "../ProductHomePage/IceCreamPage.css"
+import "../ProductHomePage/IceCreamPage.css";
+
+const cardVariants = {
+  hidden: (index: number) => ({
+    opacity: 0,
+    y: 100,
+    rotate: [-8, 0, 8][index],
+    scale: 0.9,
+  }),
+  visible: (index: number) => ({
+    opacity: 1,
+    y: [40, 0, 40][index],
+    rotate: [-8, 0, 8][index],
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      delay: index * 0.15,
+      ease: cubicBezier(0.25, 0.46, 0.45, 0.94),
+    },
+  }),
+};
+
 const IceCreamPage2 = () => {
   const { data: products, isLoading } = useGetAllProductsQuery();
   const navigate = useNavigate();
@@ -16,19 +36,25 @@ const IceCreamPage2 = () => {
 
   return (
     <div className="wavy-box_2">
-      <div className="min-h-screen flex items-center justify-center px-10">
+      <div className="min-h-screen flex items-center justify-center px-6 md:px-10">
         <div className="max-w-6xl w-full">
-
-          {/* CARD GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10   ">
+       
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {sliced.map((item: any, index: number) => (
               <motion.div
                 key={item._id}
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ amount: 0.3 }} 
+                whileHover={{
+                  scale: 1.08,
+                  rotate: 0,
+                  y: -10,
+                  zIndex: 20,
+                }}
+                className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col cursor-pointer"
               >
                 {/* IMAGE */}
                 <div className="h-60 overflow-hidden">
@@ -52,7 +78,7 @@ const IceCreamPage2 = () => {
 
                   <button
                     onClick={() => navigate(`/viewproduct/${item._id}`)}
-                    className="mt-auto h-10 bg-[var(--main-web-color)] rounded-lg hover:bg-[var(--main-web-color-2)]"
+                    className="mt-auto h-10 bg-[var(--main-web-color)] rounded-lg hover:bg-[var(--main-web-color-2)] transition"
                   >
                     <Typography className="text-white">Buy Now</Typography>
                   </button>
@@ -60,7 +86,6 @@ const IceCreamPage2 = () => {
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </div>
@@ -68,9 +93,3 @@ const IceCreamPage2 = () => {
 };
 
 export default IceCreamPage2;
-
-
-
-
-
-

@@ -4,15 +4,18 @@ import { useGetAllProductsQuery } from "../Admin/Tab/Products/ProductApi";
 import FilteringProductSkeleton from "../NAVbar/ShopAll/FilteringProduct/FilteringProductSkeleton";
 import { useNavigate } from "react-router-dom";
 import "./IceCreamPage.css";
+import { useScrollAnimation } from "../../../@All/Functions/useScrollAnimation";
 
 const IceCreamPage = () => {
   const { data: products, isLoading } = useGetAllProductsQuery();
   const navigate = useNavigate();
+    const lastItem = products?.products[products?.products?.length - 1];
+   const ref = useScrollAnimation("fade-right")
+     const ref2 = useScrollAnimation("fade-left")
+
 
   if (isLoading) return <FilteringProductSkeleton />;
   if (!products?.products?.length) return <div>No products found</div>;
-
-  const lastItem = products.products[products.products.length - 1];
 
 
   return (
@@ -21,12 +24,11 @@ const IceCreamPage = () => {
 
         {/* LEFT IMAGE */}
         <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+         whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
           className="flex-1 flex justify-center transition-transform duration-300 hover:scale-105"
         >
-          <div className="wavy-box">
+          <div ref={ref} className="wavy-box">
             <CommonImage
               src={lastItem?.productImage?.[0]}
               alt={lastItem.productName}
@@ -37,12 +39,11 @@ const IceCreamPage = () => {
 
         {/* RIGHT CONTENT */}
         <motion.div
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
           className="flex-1"
         >
-          <div className="flex flex-col gap-3">
+          <div ref={ref2} className="flex flex-col gap-3">
             <Typography className="text-4xl font-bold">
               {lastItem.productName}
             </Typography>

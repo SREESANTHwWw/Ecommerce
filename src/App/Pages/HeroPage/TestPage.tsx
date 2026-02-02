@@ -4,18 +4,21 @@ import icecream from "../../../assets/coneIce2.png";
 import { Typography } from "../../../@All/AppForm/Form";
 import "./Hero.css";
 import { useNavigate } from "react-router-dom";
+import { useScrollAnimation } from "../../../@All/Functions/useScrollAnimation";
 const TestPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate =useNavigate()
+  const ref = useScrollAnimation("fade-right");
+  const ref2 = useScrollAnimation("fade-up")
 
   return (
-    <div className="wavy">
+    <div   className="wavy_hero">
       <section className="w-full min-h-[70vh]  flex bg-[var(--main-web-color)] items-center">
         <div className="max-w-7xl mx-auto px-6  p-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* LEFT CONTENT */}
-          <div className="space-y-4 flex flex-col">
+          <div  ref={ref} className="space-y-4 flex flex-col">
             <Typography className="text-5xl md:text-6xl font-extrabold leading-tight text-[var(--main-bg-color)]">
-              Fresh & <span className="text-[var(--grad)]">Creamy</span>
+              Fresh & <Typography className="text-[var(--grad)]">Creamy</Typography>
             </Typography>
 
             <Typography className="text-5xl md:text-6xl font-extrabold leading-tight text-[var(--main-bg-color)]">
@@ -46,6 +49,7 @@ const TestPage = () => {
           {/* RIGHT IMAGE */}
           <div className="flex justify-center">
             <div
+            ref={ref2}
               className={`overflow-hidden ${
                 imageLoaded ? "" : "bg-gray-400 opacity-0"
               } rounded-3xl animate-float md:p-6 p-3 `}

@@ -1,3 +1,4 @@
-.wavy {
+.wavy_hero {
+  background-color: white;
   clip-path: shape(from 0 0,vline to 100%,curve to 15% calc(100% - 36px) with 10% calc(100% - 35px),curve to 25% calc(100% - 20.5px) with 20% calc(100% - 37px),curve to 35% calc(100% - 47px) with 30% calc(100% - 4px),curve to 45% calc(100% - 103.5px) with 40% calc(100% - 90px),curve to 55% calc(100% - 64.5px) with 50% calc(100% - 117px),curve to 65% calc(100% - 48px) with 60% calc(100% - 12px),curve to 75% calc(100% - 54.5px) with 70% calc(100% - 84px),curve to 85% calc(100% - 24px) with 80% calc(100% - 25px),curve to 100% 100% with 90% calc(100% - 23px),vline to 0, hline to 0);
 }

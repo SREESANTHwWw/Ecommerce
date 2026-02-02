@@ -1,12 +1,14 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Typography } from "../../../@All/AppForm/Form";
+import { useScrollAnimation } from "../../../@All/Functions/useScrollAnimation";
 
 const IceCreamFooter: React.FC = () => {
+  const ref = useScrollAnimation("fade-up")
   return (
 
 
-    <footer className="text-white py-10 ">
+    <footer ref={ref} className="text-white py-10 ">
       {" "}
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between gap-10">
         <div className="md:w-1/3 flex flex-col">
