@@ -10,7 +10,7 @@ import ProductFiltered from "./FilteringProduct/ProductFiltered";
 import { MdOutlineTune } from "react-icons/md";
 import SearchComp from "../../../../@All/Component/SearchComponents/SearchComp";
 import { motion } from "framer-motion";
-import IceCreamFooter from "../../ProductHomePage/IceCreamFooter";
+
 
 type FilterState = {
   category: string[];
@@ -136,9 +136,7 @@ const ShopAll = () => {
         </div>
         
       </div>
-      <div className="bg-[var(--main-web-color)]">
-            <IceCreamFooter/>
-          </div>
+    
     </div>
   );
 };

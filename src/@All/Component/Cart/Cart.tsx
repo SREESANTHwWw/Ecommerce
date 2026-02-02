@@ -16,9 +16,7 @@ const Cart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
         <div className="flex flex-col gap-6">
           <CardAdress />
-           <div className="lg:hidden">
-            <CartPayment />
-          </div>
+          
 
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
             <CartProducts />

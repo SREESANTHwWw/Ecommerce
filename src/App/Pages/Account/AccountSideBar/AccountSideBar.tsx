@@ -13,15 +13,15 @@ const menu = [
   },
 ];
 
-const credits = [
-  { title: "Coupons", path: "/account/coupons" },
-  { title: "Rewards", path: "/account/rewards" },
-];
+// const credits = [
+//   { title: "Coupons", path: "/account/coupons" },
+//   { title: "Rewards", path: "/account/rewards" },
+// ];
 
 const account = [
   { title: "Profile", path: "/account/profile" },
   { title: "Saved Address", path: "/account/address" },
-  { title: "Payment", path: "/account/payment" },
+  // { title: "Payment", path: "/account/payment" },
   { title: "Delete Account", path: "/account/delete", danger: true },
 ];
 const AccountSideBar = () => {
@@ -67,7 +67,7 @@ const AccountSideBar = () => {
       variants={sidebarVariants}
       initial="hidden"
       animate="visible"
-      className="w-64    shadow  bg-white rounded p-4 space-y-6"
+      className="w-64    shadow  bg-white  rounded p-4 space-y-6"
     >
     
       <motion.div variants={itemVariants} className="pb-4 ">
@@ -82,22 +82,6 @@ const AccountSideBar = () => {
           <SidebarLink key={item.title} {...item} />
         ))}
       </div>
-
-    
-      <div>
-        <motion.div variants={itemVariants}>
-          <Typography className="px-4 py-2 font-bold text-gray-800">
-            Credits
-          </Typography>
-        </motion.div>
-        <div className="flex flex-col gap-1 text-[var(--main-web-color)]">
-          {credits.map((item) => (
-            <SidebarLink key={item.title} {...item} />
-          ))}
-        </div>
-      </div>
-
-     
       <div>
         <motion.div variants={itemVariants}>
           <Typography className="px-4 py-2 font-bold text-gray-800">
@@ -110,6 +94,23 @@ const AccountSideBar = () => {
           ))}
         </div>
       </div>
+
+    
+      {/* <div>
+        <motion.div variants={itemVariants}>
+          <Typography className="px-4 py-2 font-bold text-gray-800">
+            Credits
+          </Typography>
+        </motion.div>
+        <div className="flex flex-col gap-1 text-[var(--main-web-color)]">
+          {credits.map((item) => (
+            <SidebarLink key={item.title} {...item} />
+          ))}
+        </div>
+      </div> */}
+
+     
+      
     </motion.aside>
   );
 };

@@ -4,7 +4,8 @@ import { TextController, Typography } from "../../../AppForm/Form";
 import { FiMapPin, FiX } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import SpinnerLoading from "../../Loading/SpinnerLoading";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 const ChangeAddressForm = ({ setChangeFrom }: any) => {
   const { data: address } = useGetAddressQuery();
@@ -39,10 +40,22 @@ const ChangeAddressForm = ({ setChangeFrom }: any) => {
           isDefault: true,
         },
       }).unwrap();
-      toast.success("Address updated successfully");
+       toast.success("Address saved successfully!", {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       setChangeFrom(false);
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to update address ");
+       toast.error("Address saving Error", {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 

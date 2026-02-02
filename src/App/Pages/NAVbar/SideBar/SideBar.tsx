@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../AuthSlice/AuthSlice";
+import toast from "react-hot-toast";
 
 const menuVariants = {
   hidden: {},
@@ -34,10 +35,21 @@ const SideBar = ({ onClose }: any) => {
     onClose();
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-   
-  };
+const handleLogout = () => {
+  dispatch(logout());
+
+  toast.success("Logged out successfully", {
+    style: {
+      borderRadius: "15px",
+      background: "#333",
+      color: "#fff",
+    },
+  });
+
+  setTimeout(() => {
+    navigate("/login");
+  }, 500);
+};
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const CheckOutapi = createApi({
   reducerPath: "CheckOutapi",
-  tagTypes: ["Order"],
+  tagTypes: ["User"], 
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
     prepareHeaders: (headers) => {
@@ -16,7 +16,6 @@ export const CheckOutapi = createApi({
 
   endpoints: (builder) => ({
 
-    // 1️⃣ Create Razorpay Order
     createOrder: builder.mutation({
       query: (data) => ({
         url: "/order/create",
@@ -25,17 +24,18 @@ export const CheckOutapi = createApi({
       }),
     }),
 
-    // 2️⃣ Verify Razorpay Payment
     verifyPayment: builder.mutation({
       query: (data) => ({
         url: "/order/verify-payment",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"], 
     }),
 
   }),
 });
+
 
 export const {
   useCreateOrderMutation,

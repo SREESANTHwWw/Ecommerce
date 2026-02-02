@@ -1,19 +1,15 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Typography } from "../../../@All/AppForm/Form";
-import { useScrollAnimation } from "../../../@All/Functions/useScrollAnimation";
 
 const IceCreamFooter: React.FC = () => {
-  const ref = useScrollAnimation("fade-up")
   return (
-
-
-    <footer ref={ref} className="text-white py-10 ">
+    <footer className="text-white py-10 ">
       {" "}
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between gap-10">
         <div className="md:w-1/3 flex flex-col">
-          <Typography className="text-2xl font-bold text-[var(--main-web-color)]">
-           Groviya
+          <Typography className="text-2xl font-bold text-[var(--main-bg-color)]">
+            Groviya
           </Typography>
           <Typography className="mt-4 text-white">
             Bringing smiles with every scoop! Explore our delicious flavors and
@@ -100,7 +96,7 @@ const IceCreamFooter: React.FC = () => {
             />
             <button
               type="submit"
-              className="bg-[var(--main-web-color)] text-white px-4 py-2 rounded hover:bg-[var(--main-web-color-2)] transition-colors"
+              className="bg-[var(--main-bg-color)] text-[var(--main-web-color-2)] px-4 py-2 rounded hover:bg-[var(--main-web-color-2)] transition-colors"
             >
               <Typography>Subscribe</Typography>
             </button>
@@ -114,7 +110,6 @@ const IceCreamFooter: React.FC = () => {
         </Typography>
       </div>
     </footer>
-  
   );
 };
 

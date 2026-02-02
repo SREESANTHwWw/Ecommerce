@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { TextController, Typography } from "../../../AppForm/Form";
 import { useState } from "react";
 import { useAddAddressMutation } from "../AddressesApi";
-
+import { toast } from "react-hot-toast";
+import SpinnerLoading from "../../Loading/SpinnerLoading";
 const AddressForm = ({ setshowAddForm }: any) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit,reset } = useForm({
     defaultValues: {
       street: "",
       city: "",
@@ -18,13 +19,32 @@ const AddressForm = ({ setshowAddForm }: any) => {
 
   const [isDefault, setIsDefault] = useState(false);
 
-  const onSubmit = (data: any) => {
-    addAddress({ ...data, isDefault }).unwrap()
-    setshowAddForm(false);
-  };
+  const onSubmit = async (data: any) => {
+    try {
+      await addAddress({ ...data, isDefault }).unwrap();
+      
+     
+      toast.success("Address saved successfully!", {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
 
+     
+      setTimeout(() => {
+        setshowAddForm(false);
+        reset();
+      }, 1000);
+      
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to save address. Please try again.");
+    }
+  };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+      {isLoading && (<SpinnerLoading/>)}
       <div className="w-full max-w-2xl bg-white rounded-xl shadow-xl p-6 sm:p-8 relative">
         <Typography className="text-2xl font-semibold text-gray-800 mb-6">
           Add New Address

@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import SpinnerLoading from "./@All/Component/Loading/SpinnerLoading";
-import { Bounce, ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 const Login = lazy(() => import("./@All/Component/Login/Login"));
 const ForgotPassword = lazy(
-  () => import("./@All/Component/Login/ForgotPassword")
+  () => import("./@All/Component/Login/ForgotPassword"),
 );
 const Admin = lazy(() => import("./App/Pages/Admin/Admin"));
 const Signuping = lazy(() => import("./@All/Component/SignUp/Signuping"));
@@ -20,10 +20,16 @@ const OverView = lazy(() => import("./App/Pages/Account/OverView/OverView"));
 const Orders = lazy(() => import("./App/Pages/Account/Orders/Orders"));
 const Cart = lazy(() => import("./@All/Component/Cart/Cart"));
 import AdminProtectedRoute from "./@All/ProtectedRoute/ProtectedRoute";
-const ViewProduct = lazy(()=> import("./App/Pages/ViewProduct/ViewProduct"))
+const ViewProduct = lazy(() => import("./App/Pages/ViewProduct/ViewProduct"));
 import ComingSoon from "./App/Pages/ComingSoon/ComingSoon";
 import CartLayout from "./@All/Component/Cart/CartLayout/CartLayout";
 import CartCheckoutPage from "./@All/Component/Cart/CartPayment/CheckOut/CartCheckoutPage";
+import AboutUs from "./App/Pages/AboutUs/AboutUs";
+import ContactPage from "./App/Pages/ContactUs/ContactPage";
+import UserProfile from "./App/Pages/Account/AccountProfile/UserProfile";
+import SavedAddresses from "./App/Pages/Account/AccountSavedAddress/SavedAddresses";
+import { Toaster } from "react-hot-toast";
+// import AccountPayment from "./App/Pages/Account/AccountPayment/AccountPayment";
 
 function App() {
   return (
@@ -37,31 +43,30 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Signuping />} />
               <Route path="/viewproduct/:id" element={<ViewProduct />} />
-
+              <Route path="/about" element={<AboutUs />} />
+               <Route path="/contact" element={<ContactPage/>} />
               <Route path="account" element={<Account />}>
                 <Route index element={<Navigate to="overview" replace />} />
                 <Route path="overview" element={<OverView />} />
                 <Route path="orders" element={<Orders />} />
-                <Route path="coupon" element={<ComingSoon/>}/>
-                <Route path="rewards" element={<ComingSoon/>}/>
-                <Route path="profile" element={<ComingSoon/>}/>
-                <Route path="address" element={<ComingSoon/>}/>
-                <Route path="payment" element={<ComingSoon/>}/>
-                <Route path="delete" element={<ComingSoon/>}/>
+                <Route path="coupons" element={<ComingSoon />} />
+                <Route path="rewards" element={<ComingSoon />} />
+                <Route path="profile" element={<UserProfile/>} />
+                <Route path="address" element={<SavedAddresses />} />
+                {/* <Route path="payment" element={<AccountPayment />} /> */}
+                <Route path="delete" element={<ComingSoon />} />
               </Route>
             </Route>
-            
-  <Route path="/cart" element={<CartLayout />}>
-    <Route index element={<Cart />} />
-    <Route path="checkout" element={<CartCheckoutPage />} />
-  </Route>
 
+            <Route path="/cart" element={<CartLayout />}>
+              <Route index element={<Cart />} />
+              <Route path="checkout" element={<CartCheckoutPage />} />
+            </Route>
 
-           
             <Route path="/registerotp" element={<RegisterOtp />} />
             <Route path="/terms&conditions" element={<TermsPage />} />
             <Route path="/groviya" element={<IntroPage />} />
-            <Route path="/about" element={<ComingSoon/>}/>
+
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             <Route
@@ -75,19 +80,10 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
+    <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     </>
   );
 }

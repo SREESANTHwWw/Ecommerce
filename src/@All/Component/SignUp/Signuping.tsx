@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { SaveFormData } from "../FormSlice/FomSlice";
 import { loginSlice } from "../../../AuthSlice/AuthSlice";
+import toast from "react-hot-toast";
 
 const Signuping = () => {
   const { handleSubmit, control, watch, register } = useForm();
@@ -50,7 +51,13 @@ const Signuping = () => {
         firstname: data.firstname,
       }).unwrap();
       setLoading(false);
-      setNotification({ type: "success", msg: res.msg });
+       toast.success(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       dispatch(
         SaveFormData({
           email: data.email,
@@ -65,7 +72,13 @@ const Signuping = () => {
     } catch (err: any) {
       setLoading(false);
       const backendMsg = err?.data?.err || "Something went wrong";
-      setNotification({ type: "error", msg: backendMsg });
+       toast.error(backendMsg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 
@@ -92,11 +105,24 @@ const Signuping = () => {
       );
       localStorage.setItem("token", res.token);
       localStorage.setItem("userId", res.user.id);
+       toast.success(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       navigate("/");
     } catch (error: any) {
       setLoading(false);
       const backendMsg = error?.data?.err || "Something went wrong";
-      setNotification({ type: "error", msg: backendMsg });
+       toast.error(backendMsg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 

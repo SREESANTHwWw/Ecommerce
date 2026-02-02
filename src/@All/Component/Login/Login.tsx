@@ -12,7 +12,8 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../FireBase/FireBase";
 import { useDispatch } from "react-redux";
 import { loginSlice } from "../../../AuthSlice/AuthSlice";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -81,11 +82,24 @@ const Login = () => {
         })
       );
       localStorage.setItem("token", res.token);
+       toast.success(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
      navigate("/")
     } catch (error: any) {
       setLoading(false);
       const backendMsg = error?.data?.err || "Something went wrong";
-      setNotification({ type: "error", msg: backendMsg });
+       toast.error(backendMsg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 

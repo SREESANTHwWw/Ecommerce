@@ -4,6 +4,7 @@ import { Typography } from "../../../../@All/AppForm/Form";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../AuthSlice/AuthSlice";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AccountdropDown = ({ user }: any) => {
 
@@ -12,7 +13,18 @@ const AccountdropDown = ({ user }: any) => {
 
 const handleLogout = () => {
   dispatch(logout());
- 
+
+  toast.success("Logged out successfully", {
+    style: {
+      borderRadius: "15px",
+      background: "#333",
+      color: "#fff",
+    },
+  });
+
+  setTimeout(() => {
+    navigate("/login");
+  }, 500);
 };
   return (
     <motion.div
@@ -34,7 +46,7 @@ const handleLogout = () => {
 
       {/* Menu */}
       <div className="flex flex-col py-2">
-        {["Orders", "Coupon", "Address", "Rewards"].map((item) => (
+        {["Overview", "Profile", "Address", "Orders"].map((item) => (
           <button
             key={item}
             onClick={()=>navigate(`/account/${item.toLowerCase()}`)}

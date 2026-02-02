@@ -1,43 +1,36 @@
+import { motion } from "framer-motion";
 import { Typography } from "../../../../../@All/AppForm/Form";
 import { RiCoupon3Line } from "react-icons/ri";
 import { MdStars } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const rewardCouponCards = [
-  {
-    title: "Coupons",
-    count: 3,
-    icon: RiCoupon3Line,
-    path: "/account/coupons",
-  },
-  {
-    title: "Rewards",
-    count: 250,
-    icon: MdStars,
-    path: "/account/rewards",
-  },
+  { title: "Coupons", count: 3, icon: RiCoupon3Line, path: "/account/coupons" },
+  { title: "Rewards", count: 250, icon: MdStars, path: "/account/rewards" },
 ];
 
 const RewardCouponDisplay = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="grid grid-cols-2 gap-3 mt-4">
-      {rewardCouponCards.map(({ title, count, icon: Icon, path }) => (
-        <button
+    <div className="grid grid-cols-2 gap-4 mt-6">
+      {rewardCouponCards.map(({ title, count, icon: Icon, path }, i) => (
+        <motion.button
           key={title}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: i * 0.15 }}
+          whileHover={{ scale: 1.05 }}
           onClick={() => navigate(path)}
-          className="group cursor-pointer"
+          className="bg-gradient-to-br from-white to-gray-50
+             rounded-2xl p-6  group"
         >
-          <div
-            className="flex flex-col items-center bg-[var(--main-bg-color)]
-            hover:bg-[var(--main-web-color-2)] transition p-4 rounded shadow-xl" 
-          >
-            <Icon className="text-4xl text-[var(--main-web-color-2)]  group-hover:scale-110 group-hover:text-[var(--main-bg-color)] transition: transition" />
-            <Typography className="mt-1">{title}</Typography>
-            <Typography className="font-semibold">{count}</Typography>
+          <div className="flex flex-col items-center space-y-2">
+            <Icon className="text-4xl text-yellow-500 group-hover:rotate-6 transition" />
+            <Typography className="font-medium">{title}</Typography>
+            <Typography className="text-xl font-bold">{count}</Typography>
           </div>
-        </button>
+        </motion.button>
       ))}
     </div>
   );

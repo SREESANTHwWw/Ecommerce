@@ -16,7 +16,7 @@ const CartLayout = () => {
       {/* Cart Navbar ONLY for cart flow */}
       <CartNavBar activeStep={getActiveStep()} />
 
-      <div className="px-4 lg:px-10">
+      <div className="">
         <BreadCrumbs />
       </div>
 

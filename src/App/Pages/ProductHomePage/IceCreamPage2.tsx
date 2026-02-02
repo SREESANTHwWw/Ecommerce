@@ -78,7 +78,7 @@ const IceCreamPage2 = () => {
 
                   <button
                     onClick={() => navigate(`/viewproduct/${item._id}`)}
-                    className="mt-auto h-10 bg-[var(--main-web-color)] rounded-lg hover:bg-[var(--main-web-color-2)] transition"
+                    className="mt-auto h-10 bg-[var(--main-web-color)] cursor-pointer rounded-lg hover:bg-[var(--main-web-color-2)] transition"
                   >
                     <Typography className="text-white">Buy Now</Typography>
                   </button>

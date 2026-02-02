@@ -80,10 +80,10 @@ const DesktopNavbar = ({
         <CartButton cartLength={cartLength} navigate={navigate} size={30} />
         {!token && (
           <button
-            className="bg-[var(--main-web-color-2)] w-20  h-9  hover:bg-[var(--main-web-color)] cursor-pointer text-white rounded-md"
+            className="bg-[var(--main-web-color-2)] w-20  h-9  hover:bg-[var(--main-bg-color)] cursor-pointer transition duration-300 text-white hover:text-[var(--main-web-color)] rounded-md"
             onClick={() => navigate("/login")}
           >
-            Login
+           <Typography>Login</Typography> 
           </button>
         )}
       </div>

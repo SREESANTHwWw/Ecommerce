@@ -6,8 +6,9 @@ import { useGetAllCartQuery } from "../../CartApi/CartApi";
 import { useDefaultAddressQuery } from "../../../Addresses/AddressesApi";
 import { toast } from "react-toastify";
 import { Typography } from "../../../../AppForm/Form";
-import PaymentSuccessNotification from "../../../../AppForm/PaymentSuccessNotification";
+import PaymentSuccessNotification from "../../../../AppForm/SuccessNotification";
 import { useNavigate } from "react-router-dom";
+import SpinnerLoading from "../../../Loading/SpinnerLoading";
 
 type PaymentMethod = "CARD" | "UPI" | "COD" | "RAZORPAY";
 
@@ -21,7 +22,7 @@ const CheckOut = () => {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("CARD");
   const { data: CartProducts } = useGetAllCartQuery();
   const { data: DefaultAddress } = useDefaultAddressQuery();
-  const [createOrder] = useCreateOrderMutation();
+  const [createOrder,{isLoading}] = useCreateOrderMutation();
   const [verifyPayment] = useVerifyPaymentMutation();
   const [total, setTotal] = useState<number>(0);
   const [finaltotal ,setFinal ] =useState<number>(0)
@@ -147,7 +148,7 @@ setFinal(finaltotal)
     setNotification(true)
       setTimeout(() => {
           navigate("/")
-        }, 1000);
+        }, 3000);
     
   } catch (error:any) {
      console.log(error);
@@ -163,6 +164,7 @@ setFinal(finaltotal)
     <div className="  px-4 py-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
        { notification && <PaymentSuccessNotification  onClose={() => setNotification(false)}/>}
+        {isLoading && <SpinnerLoading/>}
         <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Typography className="text-xl font-semibold mb-6">Select Payment Method</Typography>
 

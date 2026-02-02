@@ -9,6 +9,7 @@ import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import StarRating from "../../StarRating/StarRating ";
 import { useState } from "react";
 import CommonAlert from "../../../AppForm/CommonAlert";
+import toast from "react-hot-toast";
 
 const CartProducts = () => {
   const { data: CartProducts } = useGetAllCartQuery();
@@ -33,10 +34,31 @@ const CartProducts = () => {
   };
 
   const onConfirmDelete = async () => {
-    if (!selectedProduct) return;
-    await deleteCart(selectedProduct);
+
+    try {
+       if (!selectedProduct) return;
+       await deleteCart(selectedProduct)
+      .unwrap()
+       toast.success("Product removed from cart", {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     setAlert(false);
     setSelectedProduct(null);
+      
+    } catch (error) {
+      toast.error("Error removing product from cart", {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+   
   };
 
   return (
@@ -52,7 +74,9 @@ const CartProducts = () => {
           }}
         />
 
-        {CartProducts?.cart?.items?.map((item: any) => (
+        {
+        CartProducts?.cart?.items?.length > 0 ? (
+           CartProducts?.cart?.items?.map((item: any) => (
           <div
             key={item.productId._id}
             className="relative flex flex-col sm:flex-row gap-4 p-4 sm:p-5
@@ -73,7 +97,7 @@ const CartProducts = () => {
             <CommonImage
               src={item.productId?.productImage?.[0]}
               alt={item.productId?.productName}
-              className="w-28 h-28 sm:w-36 sm:h-36 object-cover rounded-xl border"
+              className="w-full h-56 md:w-36 md:h-36 object-cover rounded-xl border"
             />
 
             {/* Content */}
@@ -125,7 +149,18 @@ const CartProducts = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+        ):(
+          <div className="w-full h-60 flex flex-col items-center justify-center">
+          <Typography className="text-xl font-semibold">
+            Your cart is empty
+          </Typography>
+        </div>
+        )
+       
+        
+        
+        }
       </div>
     </div>
   );

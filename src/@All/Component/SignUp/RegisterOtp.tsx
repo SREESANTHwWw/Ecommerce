@@ -13,6 +13,7 @@ import { TbPasswordUser } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const RegisterOtp = ({setShowOtpForm}:any) => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -39,11 +40,23 @@ const RegisterOtp = ({setShowOtpForm}:any) => {
         firstname: formData?.firstname,
       }).unwrap();
       setLoading(false);
-      setNotification({ type: "success", msg: res.msg });
+      toast.success(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     } catch (err: any) {
       setLoading(false);
       const backendMsg = err?.data?.err || "Something went wrong";
-      setNotification({ type: "error", msg: backendMsg });
+       toast.error(backendMsg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
     setResendTimer(30);
   };
@@ -129,15 +142,24 @@ const RegisterOtp = ({setShowOtpForm}:any) => {
       // If OTP failed -> stop immediately
       if (!res.success) {
         setLoading(false);
-        setNotification({
-          type: "error",
-          msg: res.err || "OTP verification failed",
-        });
+        toast.error(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
         setOtp(new Array(6).fill(""));
         inputsRef.current[0]?.focus();
         return;
       }
-      if (res.success) {
+      if (res.success) { toast.success(res.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
         setLoading(false);
         setNotification({ type: "success", msg: res.msg });
       }
@@ -153,13 +175,22 @@ const RegisterOtp = ({setShowOtpForm}:any) => {
 
       if (createUser.success) {
         setLoading(false);
-        setNotification({ type: "success", msg: createUser.msg });
+       toast.success(createUser.msg, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
         navigate("/login");
       } else {
-        setNotification({
-          type: "error",
-          msg: createUser.err || "Registration failed",
-        });
+          toast.error(createUser.err, {
+        style: {
+          borderRadius: '15px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       }
     } catch (error: any) {
       setLoading(false);

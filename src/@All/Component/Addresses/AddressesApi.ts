@@ -13,9 +13,8 @@ export const AddressesApi = createApi({
       return headers;
     },
   }),
-  endpoints: (build) => ({
-    
-    addAddress: build.mutation<any, any>({
+  endpoints: (builder) => ({
+    addAddress: builder.mutation<any, any>({
       query: (data) => ({
         url: "/address/add",
         method: "POST",
@@ -24,27 +23,35 @@ export const AddressesApi = createApi({
       invalidatesTags: ["Address"],
     }),
 
-
-    getAddress: build.query<any, void>({
+    getAddress: builder.query<any, void>({
       query: () => "/address/all",
       providesTags: ["Address"],
     }),
 
- 
-    defaultAddress: build.query<any, void>({
+    defaultAddress: builder.query<any, void>({
       query: () => "/address/default",
       providesTags: ["Address"],
     }),
 
- 
-    updateAddress: build.mutation<
-      any,
-      { id: string; body: any }
-    >({
+    getUserAddresses: builder.query<any, void>({
+      query: () => "/address/user",
+      providesTags: ["Address"],
+    }),
+
+    updateAddress: builder.mutation<any, { id: string; body: any }>({
       query: ({ id, body }) => ({
         url: `/address/update/${id}`,
         method: "PATCH",
         body,
+      }),
+      invalidatesTags: ["Address"],
+    }),
+
+  
+    deleteAddress: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/address/delete/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Address"],
     }),
@@ -54,6 +61,8 @@ export const AddressesApi = createApi({
 export const {
   useAddAddressMutation,
   useGetAddressQuery,
+  useGetUserAddressesQuery,
   useDefaultAddressQuery,
+    useDeleteAddressMutation,
   useUpdateAddressMutation,
 } = AddressesApi;
