@@ -4,6 +4,7 @@ import { useGetMeQuery } from "../../../../@All/Component/APIs/UserApi";
 import { Typography } from "../../../../@All/AppForm/Form";
 import { useState } from "react";
 import UserEditForm from "./UserEditForm";
+import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
 
 const UserProfile = () => {
   const { data: user, isLoading } = useGetMeQuery();
@@ -31,7 +32,8 @@ const UserProfile = () => {
   if (isLoading) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <div className="w-full space-y-8 mt-7">
+    <div className="max-w-6xl mx-auto space-y-6 pb-10 px-4 md:px-0">
+       <PreviousButton  />
         {
         userEditOpen &&(
             <UserEditForm onClose={() => setUserEditOpen(false)} userdata={userdata} />

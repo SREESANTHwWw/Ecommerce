@@ -4,18 +4,26 @@ import { useGetMeQuery } from "../../../../@All/Component/APIs/UserApi";
 import { motion } from "framer-motion";
 import { ShoppingBag,  } from "lucide-react";
 
+
+import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
 const Orders = () => {
   const { data: user, isLoading } = useGetMeQuery(undefined, {
   refetchOnMountOrArgChange: true,
 });
+
   const orders = user?.data?.orders || [];
 
   return (
     <motion.div 
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
-      className="w-full min-h-full p-4 md:p-8 mt-6"
-    >
+      className="max-w-6xl mx-auto space-y-6 pb-10 px-4 md:px-0 "
+    >  
+        
+        <PreviousButton  />
+      
+      
+
       <div className="max-w-6xl mx-auto space-y-8">
        
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

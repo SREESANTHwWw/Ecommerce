@@ -10,7 +10,7 @@ import ProductFiltered from "./FilteringProduct/ProductFiltered";
 import { MdOutlineTune } from "react-icons/md";
 import SearchComp from "../../../../@All/Component/SearchComponents/SearchComp";
 import { motion } from "framer-motion";
-
+import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
 
 type FilterState = {
   category: string[];
@@ -70,7 +70,12 @@ const ShopAll = () => {
 
   return (
     <div className="flex flex-col   w-full bg-[var(--main-bg-color)]">
-      <div className="w-full flex justify-center p-4">
+      
+
+      <div className="w-full flex items-center justify-around p-4">
+        <div className="md:flex hidden">
+        <PreviousButton />
+      </div>
         <motion.div
           initial={{ y: -120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -81,7 +86,6 @@ const ShopAll = () => {
             setSearchData={(value) =>
               setFilter((prev) => ({ ...prev, search: value }))
             }
-    
           />
         </motion.div>
       </div>
@@ -103,7 +107,10 @@ const ShopAll = () => {
         </div>
         <div className="w-full flex flex-col  p-2 gap-3">
           {isMobile && (
-            <div className="flex justify-end pr-4">
+            <div className="flex justify-between pr-4">
+               <div className="">
+        <PreviousButton />
+      </div>
               <button onClick={() => setFilterTab(true)} className=" ">
                 <div className="flex gap-3">
                   <MdOutlineTune
@@ -132,11 +139,8 @@ const ShopAll = () => {
               totalPages={products?.totalPages}
             />
           </div>
-          
         </div>
-        
       </div>
-    
     </div>
   );
 };

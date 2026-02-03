@@ -11,6 +11,7 @@ import AddressForm from "../../../../@All/Component/Addresses/AddressForm/Addres
 import ChangeAddressForm from "../../../../@All/Component/Addresses/AddressForm/ChangeAddressForm";
 import toast from "react-hot-toast";
 import CommonAlert from "../../../../@All/AppForm/CommonAlert";
+import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
 
 const SavedAddresses = () => {
   const { data: address, isLoading, refetch } = useGetUserAddressesQuery();
@@ -71,8 +72,11 @@ const SavedAddresses = () => {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="max-w-6xl mx-auto space-y-6 pb-10 px-4 md:px-0">
+        <PreviousButton  />
       <div className="flex justify-between items-center mb-8">
+
+
         <div className="flex flex-col ">
           <Typography className="text-2xl font-bold text-gray-800">
             Saved Addresses

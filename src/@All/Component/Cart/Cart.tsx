@@ -35,11 +35,11 @@ const Cart = () => {
       variants={containerVariants}
       className="bg-[#FAFAFA] min-h-screen pb-20"
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-10 py-10">
+      <div className="max-w-7xl mx-auto px-4 lg:px-10 py-5">
         
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             <button 
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-[var(--main-web-color)] transition-colors text-sm font-bold uppercase tracking-widest mb-2"

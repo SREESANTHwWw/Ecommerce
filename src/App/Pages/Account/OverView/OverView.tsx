@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 import { CommonImage, Typography } from "../../../../@All/AppForm/Form";
 import OrderDisplay from "./OrderDisplay/OrderDisplay";
 import { useGetMeQuery } from "../../../../@All/Component/APIs/UserApi";
-import { Mail, Sparkles, Settings2, ShieldCheck, MapPin } from "lucide-react";
+
+import { Mail, Sparkles, Settings2, ShieldCheck, MapPin,  } from "lucide-react";
 import { useState } from "react";
 import UserEditForm from "../AccountProfile/UserEditForm";
 import { useNavigate } from "react-router-dom";
-
 import AccountResponsive from "../AccountSideBar/AccountResponsive";
+import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
+
 const OverView = () => {
   const { data: user, isLoading } = useGetMeQuery();
   const userdata = user?.data;
@@ -40,8 +42,11 @@ const OverView = () => {
       variants={container}
       initial="hidden"
       animate="show"
-      className="max-w-6xl mx-auto space-y-6 mt-6 pb-10"
+      className="max-w-6xl mx-auto space-y-6 pb-10 px-4 md:px-0"
     >
+      
+      <PreviousButton  />
+
       {userEditOpen && (
         <UserEditForm
           onClose={() => setUserEditOpen(false)}
@@ -53,8 +58,8 @@ const OverView = () => {
         variants={item}
         className="relative bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm overflow-hidden"
       >
+        {/* ... Rest of your existing profile card code ... */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--main-web-color)] opacity-[0.03] rounded-full -mr-20 -mt-20" />
-
         <div className="relative flex flex-col md:flex-row items-center md:items-start gap-8">
           <div className="relative group">
             <motion.div
@@ -122,7 +127,6 @@ const OverView = () => {
           </div>
         </motion.div>
 
-        
         <motion.div variants={item} className="lg:col-span-4 md:px-3 px-4 md:mt-0 mt-5">
           <div className="bg-gradient-to-br from-[var(--main-web-color)] to-[var(--main-web-color-2)] rounded-[2.5rem] p-6 text-white shadow-xl relative overflow-hidden h-full min-h-[200px]">
             <div className="flex flex-col space-y-4">
@@ -140,7 +144,6 @@ const OverView = () => {
                 <Typography>Contact Support</Typography>
               </button>
             </div>
-            {/* Background Shape */}
             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
           </div>
         </motion.div>

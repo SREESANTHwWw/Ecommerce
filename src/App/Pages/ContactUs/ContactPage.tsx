@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import { useRef } from "react";
 import toast from "react-hot-toast";
+import PreviousButton from "../../../@All/Component/CommonButtons/PreviousButton";
 
 interface ContactFormData {
   name: string;
@@ -54,8 +55,11 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="w-full p-8 px-6 md:px-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full p-4 px-6 md:px-16 overflow-hidden">
+      <div className=" mb-3">
+        <PreviousButton  />
+      </div>
+      <div className="max-w-7xl mx-auto ">
       
         <motion.div
           initial={{ opacity: 0, y: -40 }}

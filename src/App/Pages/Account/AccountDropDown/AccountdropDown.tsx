@@ -59,7 +59,9 @@ const handleLogout = () => {
 
       {/* Actions */}
       <div className="border-t border-gray-200 py-2">
-        <button className="px-4 py-2 w-full text-left hover:bg-gray-100 cursor-pointer">
+        <button 
+         onClick={()=>navigate(`/account/profile`)}
+        className="px-4 py-2 w-full text-left hover:bg-gray-100 cursor-pointer">
           <Typography  className="text-[var(--main-web-color)]">Edit Profile</Typography>
         </button>
         <button

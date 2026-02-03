@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../Admin/Tab/Products/ProductApi";
 import StarRating from "../../../@All/Component/StarRating/StarRating ";
-import { Typography } from "../../../@All/AppForm/Form";
+import { CommonImage, Typography } from "../../../@All/AppForm/Form";
 import RelatedProduct from "./RelatedProducts/RelatedProduct";
 import AddtoCartButton from "../../../@All/Component/CommonButtons/AddtoCartButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap,  Truck ,Droplets} from "lucide-react";
+import PreviousButton from "../../../@All/Component/CommonButtons/PreviousButton";
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -45,9 +46,13 @@ const ViewProduct = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-[#FAFAFA] min-h-screen pb-20"
-    >
-      <div className="max-w-7xl mx-auto px-4 pt-10">
+      className="bg-[var(--main-bg-color)] min-h-screen pb-20"
+
+    > 
+      <div className="max-w-7xl mx-auto px-4  ">
+        <div className="p-4 ">
+        <PreviousButton variant={item} />
+      </div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
           <div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-6">
             <div className="flex md:flex-col gap-3 shrink-0 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
@@ -60,7 +65,7 @@ const ViewProduct = () => {
                   className={`w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer transition-all border-2 
           ${activeImg === index ? "border-[var(--main-web-color)] shadow-md" : "border-gray-100 opacity-60"}`}
                 >
-                  <img
+                  <CommonImage
                     src={img}
                     className="w-full h-full object-cover"
                     alt={`Thumbnail ${index}`}
@@ -69,7 +74,7 @@ const ViewProduct = () => {
               ))}
             </div>
 
-            {/* Main Stage */}
+          
             <div className="relative w-full aspect-[4/5] md:aspect-square bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-50 shadow-inner group">
               <AnimatePresence mode="wait">
                 <motion.img
@@ -83,7 +88,7 @@ const ViewProduct = () => {
                 />
               </AnimatePresence>
 
-              {/* Stock Badge */}
+      
               <div className="absolute top-6 left-6 z-10">
                 {item.productStock > 0 ? (
                   <Typography className="bg-white/90 backdrop-blur-md text-emerald-700 text-[10px] font-black uppercase px-4 py-2 rounded-full shadow-sm tracking-widest">
