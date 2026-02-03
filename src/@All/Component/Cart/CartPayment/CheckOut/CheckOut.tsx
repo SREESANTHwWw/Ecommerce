@@ -37,7 +37,7 @@ const CheckOut = () => {
   const items = CartProducts?.cart?.items;
   const address = DefaultAddress?.address;
 
-  const deliveryFee = 50;
+  const deliveryFee = 20;
   const discount = 100;
 
   useEffect(() => {
