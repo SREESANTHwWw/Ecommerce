@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import CartNavBar from "../CartNavBar/CartNavBar";
 import BreadCrumbs from "../../../../App/Pages/Breadcrumb/BreadCrumbs";
+import ScrollToTop from "../../../Functions/ScrollToTop";
 
 const CartLayout = () => {
   const location = useLocation();
@@ -15,7 +16,7 @@ const CartLayout = () => {
     <div className="w-full min-h-screen bg-gray-50">
       {/* Cart Navbar ONLY for cart flow */}
       <CartNavBar activeStep={getActiveStep()} />
-
+ <ScrollToTop/>
       <div className="">
         <BreadCrumbs />
       </div>

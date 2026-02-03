@@ -33,10 +33,10 @@ const AddressForm = ({ setshowAddForm }: any) => {
       });
 
      
-      setTimeout(() => {
+     
         setshowAddForm(false);
         reset();
-      }, 1000);
+    
       
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to save address. Please try again.");

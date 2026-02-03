@@ -65,7 +65,7 @@ const AboutUs = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-6xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+        className="max-w-6xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 p-8 text-center"
       >
         {[
           { value: "50+", label: "Flavours" },

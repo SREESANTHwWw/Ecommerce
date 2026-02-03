@@ -4,28 +4,48 @@ import {
   useUpdateQtyMutation,
 } from "../CartApi/CartApi";
 import { CommonImage, Typography } from "../../../AppForm/Form";
-
-import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiMinus, FiPlus, FiTrash2, FiShoppingBag } from "react-icons/fi";
 import StarRating from "../../StarRating/StarRating ";
 import { useState } from "react";
 import CommonAlert from "../../../AppForm/CommonAlert";
 import toast from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const CartProducts = () => {
   const { data: CartProducts } = useGetAllCartQuery();
   const [updateQty, { isLoading }] = useUpdateQtyMutation();
   const [deleteCart] = useDeleteCartMutation();
-
+  const nav = useNavigate();
   const [alert, setAlert] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
 
-  const handleIncrease = (productId: string, qty: number) => {
-    updateQty({ productId, qty: qty + 1 });
+  // Common Toast Style for the Ice Cream Theme
+  const toastStyle = {
+    borderRadius: '15px',
+    background: '#333',
+    color: '#fff',
+    fontSize: '14px',
+    fontWeight: 'bold',
   };
 
-  const handleDecrease = (productId: string, qty: number) => {
+  const handleIncrease = async (productId: string, qty: number, name: string) => {
+    try {
+      await updateQty({ productId, qty: qty + 1 }).unwrap();
+      toast.success(`Another scoop of ${name}!`, { style: toastStyle, icon: '🍦' });
+    } catch (err) {
+      toast.error("Could not update quantity", { style: toastStyle });
+    }
+  };
+
+  const handleDecrease = async (productId: string, qty: number, name: string) => {
     if (qty <= 1) return;
-    updateQty({ productId, qty: qty - 1 });
+    try {
+      await updateQty({ productId, qty: qty - 1 }).unwrap();
+      toast.success(`Removed a scoop of ${name}`, { style: toastStyle });
+    } catch (err) {
+      toast.error("Could not update quantity", { style: toastStyle });
+    }
   };
 
   const confirmDelete = (productId: string) => {
@@ -34,39 +54,23 @@ const CartProducts = () => {
   };
 
   const onConfirmDelete = async () => {
-
     try {
-       if (!selectedProduct) return;
-       await deleteCart(selectedProduct)
-      .unwrap()
-       toast.success("Product removed from cart", {
-        style: {
-          borderRadius: '15px',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-    setAlert(false);
-    setSelectedProduct(null);
-      
+      if (!selectedProduct) return;
+      await deleteCart(selectedProduct).unwrap();
+      toast.success("Flavor removed from bag", { style: toastStyle, icon: '🗑️' });
+      setAlert(false);
+      setSelectedProduct(null);
     } catch (error) {
-      toast.error("Error removing product from cart", {
-        style: {
-          borderRadius: '15px',
-          background: '#333',
-          color: '#fff',
-        },
-      });
+      toast.error("Error removing product", { style: toastStyle });
     }
-   
   };
 
   return (
-    <div className="w-full h-full bg-gray-50 p-4 sm:p-6">
-      <div className="max-w-6xl mx-auto space-y-5">
+    <div className="w-full h-full bg-white">
+      <div className="max-w-6xl mx-auto space-y-6 p-2">
         <CommonAlert
           isOpen={alert}
-          message="Remove this item from your cart?"
+          message="Remove this delicious flavor from your bag?"
           onConfirm={onConfirmDelete}
           onCancel={() => {
             setAlert(false);
@@ -74,93 +78,108 @@ const CartProducts = () => {
           }}
         />
 
-        {
-        CartProducts?.cart?.items?.length > 0 ? (
-           CartProducts?.cart?.items?.map((item: any) => (
-          <div
-            key={item.productId._id}
-            className="relative flex flex-col sm:flex-row gap-4 p-4 sm:p-5
-              bg-white rounded-2xl border border-gray-100
-              shadow-sm hover:shadow-md transition"
-          >
-            {/* Delete */}
-            <button
-              onClick={() => confirmDelete(item.productId._id)}
-              className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center cursor-pointer
-                rounded-full text-gray-400 hover:text-red-500
-                hover:bg-red-50 transition"
-            >
-              <FiTrash2 size={16} />
-            </button>
-
-            {/* Image */}
-            <CommonImage
-              src={item.productId?.productImage?.[0]}
-              alt={item.productId?.productName}
-              className="w-full h-56 md:w-36 md:h-36 object-cover rounded-xl border"
-            />
-
-            {/* Content */}
-            <div className="flex-1 flex flex-col gap-2">
-              <Typography className="font-semibold text-base sm:text-lg line-clamp-1">
-                {item.productId?.productName}
-              </Typography>
-
-              <Typography className="text-sm text-gray-500 line-clamp-2">
-                {item.productId?.productDescription}
-              </Typography>
-
-              <StarRating rating={item.productId?.averageRating} />
-
-              {/* Price + Qty */}
-              <div className="flex items-center justify-between mt-3">
-                <Typography className="text-lg font-bold text-[var(--main-web-color)]">
-                  ₹{item.productId?.productPrice}
-                </Typography>
-
-                <div className="flex items-center gap-3 bg-gray-100 rounded-full px-3 py-1.5">
+        <AnimatePresence mode="popLayout">
+          {CartProducts?.cart?.items?.length > 0 ? (
+            CartProducts?.cart?.items?.map((item: any) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, x: -100 }}
+                key={item.productId._id}
+                className="group relative flex flex-col sm:flex-row gap-6 p-5
+                  bg-white rounded-[2rem] border border-gray-100
+                  hover:shadow-[0_15px_30px_rgba(0,0,0,0.05)] transition-all duration-300"
+              >
+                {/* Image Section */}
+                <div className="relative shrink-0">
+                  <CommonImage
+                    src={item.productId?.productImage?.[0]}
+                    alt={item.productId?.productName}
+                    className="w-full h-48 sm:w-32 sm:h-32 object-cover rounded-[1.5rem] bg-blue-50/50 p-1"
+                  />
                   <button
-                    onClick={() =>
-                      handleDecrease(item.productId._id, item.qty)
-                    }
-                    disabled={item.qty <= 1 || isLoading}
-                    className="w-8 h-8 flex items-center justify-center cursor-pointer
-                      rounded-full bg-white shadow
-                      disabled:opacity-40  disabled:cursor-not-allowed" 
+                    onClick={() => confirmDelete(item.productId._id)}
+                    className="absolute -top-2 -left-2 w-8 h-8 flex items-center cursor-pointer justify-center 
+                      bg-white shadow-md rounded-full text-gray-400 hover:text-red-500 transition-colors"
                   >
-                    <FiMinus size={14} />
-                  </button>
-
-                  <span className="min-w-[20px] text-center text-sm font-semibold">
-                    {item.qty}
-                  </span>
-
-                  <button
-                    onClick={() =>
-                      handleIncrease(item.productId._id, item.qty)
-                    }
-                    disabled={isLoading}
-                    className="w-8 h-8 flex items-center justify-center cursor-pointer
-                      rounded-full bg-white shadow disabled:cursor-not-allowed"
-                  >
-                    <FiPlus size={14} />
+                    <FiTrash2 size={14} />
                   </button>
                 </div>
+
+                {/* Content Section */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-start">
+                      <Typography className="font-black text-lg text-gray-800 tracking-tight">
+                        {item.productId?.productName}
+                      </Typography>
+                      <Typography className="font-black text-xl text-[var(--main-web-color)]">
+                        ₹{item.productId?.productPrice * item.qty}
+                      </Typography>
+                    </div>
+                    <Typography className="text-xs text-gray-400 font-medium uppercase tracking-widest">
+                      {item.productId?.productCategory || "Artisanal Scoop"}
+                    </Typography>
+                    <div className="pt-1">
+                        <StarRating rating={item.productId?.averageRating} />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center gap-1">
+                        <span className="text-[10px] font-bold text-gray-300 uppercase">Unit Price: ₹{item.productId?.productPrice}</span>
+                    </div>
+
+                    {/* Modern Qty Picker */}
+                    <div className="flex items-center gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-1">
+                      <button
+                        onClick={() => handleDecrease(item.productId._id, item.qty, item.productId?.productName)}
+                        disabled={item.qty <= 1 || isLoading}
+                        className="w-9 h-9 flex items-center justify-center rounded-xl cursor-pointer bg-white shadow-sm
+                          text-gray-600 disabled:opacity-30 transition-all active:scale-90"
+                      >
+                        <FiMinus size={16} />
+                      </button>
+
+                      <span className="w-4 text-center text-sm font-black text-gray-700">
+                        {item.qty}
+                      </span>
+
+                      <button
+                        onClick={() => handleIncrease(item.productId._id, item.qty, item.productId?.productName)}
+                        disabled={isLoading}
+                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--main-web-color)] cursor-pointer hover:bg-[var(--main-web-color-2)] shadow-sm
+                          text-white transition-all active:scale-90"
+                      >
+                        <FiPlus size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))
+          ) : (
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }}
+              className="w-full py-20 flex flex-col items-center justify-center text-center space-y-4"
+            >
+              <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-200">
+                 <FiShoppingBag size={40} />
               </div>
-            </div>
-          </div>
-        ))
-        ):(
-          <div className="w-full h-60 flex flex-col items-center justify-center">
-          <Typography className="text-xl font-semibold">
-            Your cart is empty
-          </Typography>
-        </div>
-        )
-       
-        
-        
-        }
+              <div>
+                <Typography className="text-2xl font-black text-gray-800">Your bag is empty</Typography>
+                <Typography className="text-sm text-gray-400 mt-1">Looks like you haven't picked a flavor yet!</Typography>
+              </div>
+              <button 
+              onClick={()=>nav('/shopall')}
+              className="mt-4 px-8 py-3 bg-[var(--main-web-color)] cursor-pointer text-white rounded-2xl font-bold shadow-lg shadow-blue-100 transition-transform active:scale-95">
+                Browse Flavors
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -1,120 +1,117 @@
 import { Typography } from "../../../AppForm/Form";
-import { FiMapPin, FiEdit2 } from "react-icons/fi";
-import {
-  useDefaultAddressQuery,
-  
-} from "../../Addresses/AddressesApi";
+import { FiMapPin, FiEdit2, FiPlus, FiHome } from "react-icons/fi";
+import { useDefaultAddressQuery } from "../../Addresses/AddressesApi";
 import { useState } from "react";
 import AddressForm from "../../Addresses/AddressForm/AddressForm";
 import ChangeAddressForm from "../../Addresses/AddressForm/ChangeAddressForm";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CardAdress = () => {
-  // const { data: address } = useGetAddressQuery();
   const { data: DefaultAddress } = useDefaultAddressQuery();
 
   const [showAddForm, setshowAddForm] = useState(false);
   const [showChangeform, setChangeFrom] = useState(false);
   const addressDefault = DefaultAddress?.address;
-  console.log(addressDefault);
 
   return (
-    
-    <div className="w-full bg-[var(--grad)] rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 flex flex-col gap-4">
-      {showAddForm && <AddressForm setshowAddForm={setshowAddForm} />}
-      {showChangeform && <ChangeAddressForm setChangeFrom={setChangeFrom} />}
+    <div className="w-full bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/40 p-5 sm:p-7 relative overflow-hidden">
+      
+      {/* Subtle Background Icon Decoration */}
+      <FiMapPin className="absolute -right-4 -bottom-4 text-blue-50/50 size-32 -rotate-12" />
 
-      {addressDefault ? (
-        <div
-          key={addressDefault?._id}
-          className="flex flex-col md:flex-row md:items-center gap-4 border-b last:border-b-0 pb-4 last:pb-0"
-        >
-          <div className="flex items-start gap-3 flex-1">
-            <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-[var(--main-web-color)]/10 text-[var(--main-web-color)]">
-              <FiMapPin size={18} />
+      <AnimatePresence>
+        {showAddForm && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+             <AddressForm setshowAddForm={setshowAddForm} />
+          </motion.div>
+        )}
+        {showChangeform && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+             <ChangeAddressForm setChangeFrom={setChangeFrom} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-[var(--main-web-color)] animate-pulse" />
+            <Typography className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+              Shipping Destination
+            </Typography>
+          </div>
+          {addressDefault && (
+            <span className="text-[10px] font-bold bg-blue-50 text-[var(--main-web-color)] px-3 py-1 rounded-full flex items-center gap-1">
+              <FiHome size={10} /> DEFAULT
+            </span>
+          )}
+        </div>
+
+        {addressDefault ? (
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex items-start gap-4 flex-1">
+              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-2xl bg-blue-50 text-bg-[var(--main-web-color)]">
+                <FiMapPin size={22} />
+              </div>
+
+              <div className="space-y-1 flex flex-col">
+                <Typography className="font-black text-lg text-gray-800 leading-tight">
+                  {addressDefault?.street}
+                </Typography>
+                <Typography className="text-sm text-gray-500 font-medium">
+                  {addressDefault?.city}, {addressDefault?.state} — {addressDefault?.pincode}
+                </Typography>
+                <Typography className="text-xs text-gray-400 font-bold uppercase tracking-widest pt-1">
+                  {addressDefault?.country}
+                </Typography>
+              </div>
             </div>
 
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Typography className="font-semibold text-sm sm:text-base">
-                  Deliver to {addressDefault?.street}, {addressDefault?.city},{" "}
-                  {addressDefault?.state}
-                </Typography>
-               
-              </div>
-              <div className=" flex flex-col gap-2 p-1 ">
-                <Typography className="text-xs sm:text-sm text-gray-500">
-                  ({addressDefault?.pincode})
-                </Typography>
-              <Typography className="text-sm text-gray-600  leading-relaxed">
-                {addressDefault?.country}
-              </Typography>
+            <div className="flex items-center gap-3">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setChangeFrom(true)}
+                className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 h-12 px-6 rounded-2xl bg-[var(--main-web-color)] text-white cursor-pointer hover:bg-[var(--main-web-color-2)] transition-all text-sm font-bold shadow-lg shadow-gray-200"
+              >
+                <FiEdit2 size={14} />
+               <Typography>Change</Typography> 
+              </motion.button>
 
-              </div>
- 
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setshowAddForm(true)}
+                className="inline-flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-gray-100 cursor-pointer text-gray-400 hover:border-[var(--main-web-color)] hover:text-[var(--main-web-color)] transition-all"
+              >
+                <FiPlus size={20} />
+              </motion.button>
             </div>
           </div>
+        ) : (
+          <div className="flex flex-col md:flex-row md:items-center gap-6 py-2">
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-2xl bg-orange-50 text-orange-500">
+                <FiMapPin size={22} />
+              </div>
+              <div className="space-y-1 flex flex-col">
+                <Typography className="font-black text-lg text-gray-800">
+                  Where should we send the ice cream?
+                </Typography>
+                <Typography className="text-sm text-gray-400">
+                  No delivery address found in your records.
+                </Typography>
+              </div>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto md:ml-auto">
-            <button
-              onClick={() => setChangeFrom(true)}
-              className="inline-flex items-center justify-center gap-2 cursor-pointer
-      h-10 px-4 rounded-lg
-      bg-[var(--main-web-color)]
-      text-white
-      hover:opacity-90 transition
-      text-sm font-medium"
-            >
-              <FiEdit2 size={15} />
-              <Typography>Change</Typography>
-            </button>
-
-            <button
+            <motion.button
+              whileHover={{ x: 5 }}
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl cursor-pointer bg-[var(--main-web-color)] text-white font-black text-sm shadow-xl shadow-blue-100 transition-all"
               onClick={() => setshowAddForm(true)}
-              className="inline-flex items-center justify-center gap-2 cursor-pointer
-      h-10 px-4 rounded-lg
-      border border-[var(--main-web-color)]
-      text-[var(--main-web-color)]
-      hover:bg-[var(--main-web-color)]/10 transition
-      text-sm font-medium"
             >
-              <FiMapPin size={15} />
-              <Typography>Add</Typography>
-            </button>
+             <Typography>Add New Address</Typography>  
+            </motion.button>
           </div>
-        </div>
-      ) : (
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
-          {/* ICON + PLACEHOLDER */}
-          <div className="flex items-start gap-3 flex-1">
-            <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-[var(--main-web-color)]/10 text-[var(--main-web-color)]">
-              <FiMapPin size={18} />
-            </div>
-
-            <div>
-              <Typography className="font-semibold text-sm sm:text-base">
-                No address added
-              </Typography>
-              <Typography className="text-sm text-gray-600 mt-1 leading-relaxed">
-                Please add your delivery address
-              </Typography>
-            </div>
-          </div>
-
-          {/* ADD ADDRESS BUTTON */}
-          <button
-            className="w-full md:w-auto md:ml-auto flex items-center justify-center gap-2 cursor-pointer
-            px-4 py-2.5 rounded-xl border
-            border-[var(--main-web-color)]
-            text-[var(--main-web-color)]
-            hover:bg-[var(--main-web-color)]
-            hover:text-white transition text-sm font-medium"
-            onClick={() => setshowAddForm(true)}
-          >
-            <FiEdit2 size={14} />
-            Add Address
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

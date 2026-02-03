@@ -98,11 +98,16 @@ const CartNavBar = ({ activeStep = "Cart" }: { activeStep?: Step }) => {
           </div>
 
           {/* Secure */}
-          <div className="hidden md:flex items-center gap-2">
-            <RiShieldCheckFill className="text-emerald-400" size={26} />
-            <Typography className="text-xs text-white">
-              100% Secure Checkout
-            </Typography>
+            <div className="hidden lg:flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/10">
+            <RiShieldCheckFill className="text-emerald-400" size={20} />
+            <div className="flex flex-col">
+              <Typography className="text-[9px] font-black text-white/50 uppercase tracking-tighter leading-none">
+                Encryption
+              </Typography>
+              <Typography className="text-[10px] font-bold text-white uppercase">
+                256-Bit SSL
+              </Typography>
+            </div>
           </div>
 
         </div>

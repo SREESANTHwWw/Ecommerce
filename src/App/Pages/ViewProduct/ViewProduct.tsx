@@ -6,7 +6,7 @@ import { Typography } from "../../../@All/AppForm/Form";
 import RelatedProduct from "./RelatedProducts/RelatedProduct";
 import AddtoCartButton from "../../../@All/Component/CommonButtons/AddtoCartButton";
 import { motion, AnimatePresence } from "framer-motion";
-import {  Zap, ShieldCheck, Truck } from "lucide-react";
+import { Zap,  Truck ,Droplets} from "lucide-react";
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -104,11 +104,11 @@ const ViewProduct = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="flex flex-col ">
+              <div className="flex flex-col  ">
                 <Typography className="text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-2">
                   {item.productName}
                 </Typography>
-                <Typography className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">
+                <Typography className="text-gray-400 px-1 text-xs font-bold uppercase tracking-widest mb-2">
                   {item.productCategory}
                 </Typography>
               </div>
@@ -134,14 +134,14 @@ const ViewProduct = () => {
                 <Typography className="text-lg line-through text-gray-400 font-medium">
                   ₹{item.productOfferPrice}
                 </Typography>
-                <span className="ml-auto text-emerald-600 text-sm font-bold">
+                <Typography className="ml-auto text-emerald-600 text-sm font-bold">
                   {Math.round(
                     ((item.productOfferPrice - item.productPrice) /
                       item.productOfferPrice) *
                       100,
                   )}
                   % OFF
-                </span>
+                </Typography>
               </div>
             </motion.div>
 
@@ -156,17 +156,18 @@ const ViewProduct = () => {
             </motion.div>
 
             {/* Benefits */}
-            <div className="grid grid-cols-2 gap-4 my-2">
-              <div className="flex items-center gap-2 text-[11px] font-bold text-gray-500 uppercase">
-                <Truck size={16} className="text-[var(--main-web-color)]" />{" "}
-                Free Delivery
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex items-center gap-2 p-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <Truck size={18} className="text-blue-500" />
+                <span className="text-[10px] font-bold text-gray-600 uppercase">
+                  Cold-Chain Delivery
+                </span>
               </div>
-              <div className="flex items-center gap-2 text-[11px] font-bold text-gray-500 uppercase">
-                <ShieldCheck
-                  size={16}
-                  className="text-[var(--main-web-color)]"
-                />{" "}
-                1 Year Warranty
+              <div className="flex items-center gap-2 p-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <Droplets size={18} className="text-pink-400" />
+                <span className="text-[10px] font-bold text-gray-600 uppercase">
+                  100% Organic Dairy
+                </span>
               </div>
             </div>
 
@@ -180,9 +181,10 @@ const ViewProduct = () => {
                 className="w-full h-14 bg-[var(--main-web-color)] hover:bg-[var(--main-web-color-2)] text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl transition-all active:scale-95"
                 product={item}
               />
-              <button 
-              disabled
-              className="w-full h-14 bg-[var(--main-web-color)] disabled:cursor-not-allowed hover:opacity-90 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-orange-100 transition-all active:scale-95">
+              <button
+                disabled
+                className="w-full h-14 bg-[var(--main-web-color)] disabled:cursor-not-allowed hover:opacity-90 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-orange-100 transition-all active:scale-95"
+              >
                 <Zap size={18} fill="currentColor" />
                 Buy Now
               </button>
