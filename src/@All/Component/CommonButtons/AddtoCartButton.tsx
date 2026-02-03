@@ -80,7 +80,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
      
       className={`relative flex items-center justify-center cursor-pointer gap-1.5 md:gap-2 overflow-hidden 
         px-3 py-2 md:px-6 md:py-3 font-bold transition-all
-        bg-[var(--main-web-color)] hover:bg-[var(--main-web-color-2)] text-white rounded-[1rem] md:rounded-[1.2rem] shadow-lg shadow-blue-100 
+        bg-[var(--main-web-color)] hover:bg-[var(--main-web-color-2)] text-white rounded-[1rem] md:rounded-[1.2rem] shadow-lg 
         disabled:bg-blue-300 disabled:cursor-not-allowed w-full ${className}`}
     >
     

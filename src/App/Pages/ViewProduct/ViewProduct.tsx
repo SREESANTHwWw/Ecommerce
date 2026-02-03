@@ -158,7 +158,7 @@ const ViewProduct = () => {
             {/* Benefits */}
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2 p-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <Truck size={18} className="text-blue-500" />
+                <Truck size={18} className="text-[var(--main-web-color-2)]" />
                 <span className="text-[10px] font-bold text-gray-600 uppercase">
                   Cold-Chain Delivery
                 </span>

@@ -104,7 +104,7 @@ const CardAdress = () => {
 
             <motion.button
               whileHover={{ x: 5 }}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl cursor-pointer bg-[var(--main-web-color)] text-white font-black text-sm shadow-xl shadow-blue-100 transition-all"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl cursor-pointer bg-[var(--main-web-color)] text-white font-black text-sm shadow-xl  transition-all"
               onClick={() => setshowAddForm(true)}
             >
              <Typography>Add New Address</Typography>  
