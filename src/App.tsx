@@ -29,6 +29,7 @@ import ContactPage from "./App/Pages/ContactUs/ContactPage";
 import UserProfile from "./App/Pages/Account/AccountProfile/UserProfile";
 import SavedAddresses from "./App/Pages/Account/AccountSavedAddress/SavedAddresses";
 import { Toaster } from "react-hot-toast";
+import NotFound from "./@All/Component/Loading/NotFound";
 // import AccountPayment from "./App/Pages/Account/AccountPayment/AccountPayment";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                 <Route path="delete" element={<ComingSoon />} />
               </Route>
             </Route>
+            <Route path="*" element={<NotFound/>} />
 
             <Route path="/cart" element={<CartLayout />}>
               <Route index element={<Cart />} />

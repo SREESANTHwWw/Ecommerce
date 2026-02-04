@@ -49,9 +49,9 @@ const Cart = () => {
             </button>
             <div className="flex items-center gap-3">
               <div className="p-3 bg-[var(--main-web-color)]  text-white rounded-2xl shadow-lg shadow-blue-100">
-                <ShoppingBasket size={28} />
+                <ShoppingBasket size={28}  />
               </div>
-              <Typography className="text-4xl font-black text-gray-900 tracking-tight">
+              <Typography className="md:text-4xl text-2xl font-black text-gray-900 tracking-tight">
                 Your <span className="text-[var(--main-web-color)] italic">Sweet</span> Bag
               </Typography>
             </div>

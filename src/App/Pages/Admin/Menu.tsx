@@ -7,7 +7,7 @@ import {
 
 } from "react-icons/md";
 import { RiAddCircleLine } from "react-icons/ri";
-import { IoReorderThree } from "react-icons/io5";
+// import { IoReorderThree } from "react-icons/io5";
 
 const size = 24;
 
@@ -38,11 +38,11 @@ const menu: menuType[] = [
         url: "/products/add",
         icon: RiAddCircleLine
       },
-       {
-        title: "Re-ordering ",
-        url: "/products/reorder",
-        icon: IoReorderThree
-      },
+      //  {
+      //   title: "Re-ordering ",
+      //   url: "/products/reorder",
+      //   icon: IoReorderThree
+      // },
     ]
   },
   { title: "Settings", url: "/settings", icon: MdOutlineSettings },

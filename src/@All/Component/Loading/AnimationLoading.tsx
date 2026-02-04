@@ -21,7 +21,7 @@ const AnimationLoading = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-xl bg-white/60 dark:bg-slate-950/80 z-50">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-xl bg-[var(--main-web-color)] z-50">
       <div className="flex flex-col items-center gap-8">
         
       
@@ -35,19 +35,19 @@ const AnimationLoading = () => {
           
        
           <motion.div
-            className="w-16 h-16 bg-[var(--main-web-color-2)] rounded-2xl mx-auto flex items-center justify-center relative shadow-lg"
+            className="w-16 h-16 bg-[var(--main-bg-color)] rounded-2xl mx-auto flex items-center justify-center relative shadow-lg"
             animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           >
            
             <div className="flex gap-2">
               <motion.div 
-                className="w-2 h-2 bg-white rounded-full" 
+                className="w-2 h-2 bg-[var(--main-web-color-2)] rounded-full" 
                 animate={{ scaleY: [1, 0.1, 1] }} 
                 transition={{ repeat: Infinity, duration: 2, times: [0, 0.1, 0.2] }}
               />
               <motion.div 
-                className="w-2 h-2 bg-white rounded-full" 
+                className="w-2 h-2 bg-[var(--main-web-color-2)] rounded-full" 
                 animate={{ scaleY: [1, 0.1, 1] }} 
                 transition={{ repeat: Infinity, duration: 2, times: [0, 0.1, 0.2] }}
               />
@@ -80,7 +80,7 @@ const AnimationLoading = () => {
             </motion.div>
           </AnimatePresence>
           
-          <Typography className="text-[10px] text-gray-400 mt-2 uppercase tracking-tighter">
+          <Typography className="text-2xl text-gray-400 mt-2 uppercase tracking-tighter">
             Free tier hosting might take 10-15s to spin up
           </Typography>
         </div>
