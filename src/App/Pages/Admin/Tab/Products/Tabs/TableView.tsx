@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaEdit, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 
-const TableView = ({ searchData }: { searchData?: string }) => {
+const TableView = () => {
   // Replace this with your actual RTK Query data if needed
   const products = [
     { id: 1, name: "Wireless Mouse", price: 599, stock: 25, category: "Accessories" },

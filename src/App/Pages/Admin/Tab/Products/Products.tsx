@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutGrid, List, Plus, Search } from "lucide-react"; // Modern icons
+import { LayoutGrid, List,  Search } from "lucide-react"; // Modern icons
 import Cardview from "./Tabs/Cardview";
 import TableView from "./Tabs/TableView";
 import { TextController, Typography } from "../../../../../@All/AppForm/Form";
@@ -87,7 +87,7 @@ const Products = () => {
           {tab === 0 ? (
             <Cardview key="cards" searchData={SearchValue} />
           ) : (
-            <TableView key="table" searchData={SearchValue} />
+            <TableView key="table"  />
           )}
         </AnimatePresence>
       </motion.div>
