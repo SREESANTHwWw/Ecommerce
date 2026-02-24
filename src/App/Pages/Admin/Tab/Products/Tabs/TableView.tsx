@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaEdit, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 
-const TableView = () => {
+const TableView = ({data}:any) => {
   // Replace this with your actual RTK Query data if needed
   const products = [
     { id: 1, name: "Wireless Mouse", price: 599, stock: 25, category: "Accessories" },
@@ -10,7 +10,8 @@ const TableView = () => {
     { id: 4, name: "USB-C Cable", price: 299, stock: 50, category: "Cables" },
     { id: 5, name: "Laptop Stand", price: 999, stock: 15, category: "Office" },
   ];
-
+    console.log(data);
+    
   // Animation variants for the table rows
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,7 +44,7 @@ const TableView = () => {
             initial="hidden"
             animate="visible"
           >
-            {products.map((product) => (
+            {data?.products.map((product:any) => (
               <motion.tr
                 key={product.id}
                 variants={itemVariants}
@@ -52,23 +53,23 @@ const TableView = () => {
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">
-                      #{product.id}
+                      #{product._id.slice(-5).toUpperCase()}
                     </div>
-                    <span className="font-semibold text-slate-700">{product.name}</span>
+                    <span className="font-semibold text-slate-700">{product.productName}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <span className="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">
-                    {product.category}
+                    {product.productCategory}
                   </span>
                 </td>
                 <td className="px-6 py-4 font-bold text-slate-900">
-                  ₹{product.price.toLocaleString()}
+                  ₹{product.productPrice}
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${product.stock > 10 ? 'bg-green-500' : 'bg-orange-500'}`} />
-                    <span className="text-sm text-slate-600 font-medium">{product.stock} units</span>
+                    <div className={`w-2 h-2 rounded-full ${product.productStock > 10 ? 'bg-green-500' : 'bg-orange-500'}`} />
+                    <span className="text-sm text-slate-600 font-medium">{product.productStock} units</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">

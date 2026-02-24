@@ -1,29 +1,22 @@
+import { Navigate, Outlet } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
-import { Navigate } from "react-router-dom";
-import  {jwtDecode} from "jwt-decode"
+const AdminProtectedRoute = () => {
+  const token = localStorage.getItem("token");
 
-const AdminProtectedRoute = ({children}:any)=>{
+  if (!token) return <Navigate to="/login" replace />;
 
-    const token = localStorage.getItem("token");
-    
-    if(!token){
-        return <Navigate to="/login"  replace/>;
+  try {
+    const decode = jwtDecode<{ role: string }>(token);
+
+    if (decode.role !== "admin") {
+      return <Navigate to="/login" replace />;
     }
-    try {
 
-        const decode = jwtDecode<{role: string}>(token);
-     
+    return <Outlet />; // ✅ Correct way for nested routes
+  } catch (error) {
+    return <Navigate to="/login" replace />;
+  }
+};
 
-        if(decode.role !=="admin"){
-            return <Navigate to="/login"  replace/>;
-        }
-        return children
-        
-    } catch (error) {
-        return <Navigate to="/login"  replace/>
-        
-    }
- 
-   
-}
-export default AdminProtectedRoute
+export default AdminProtectedRoute;

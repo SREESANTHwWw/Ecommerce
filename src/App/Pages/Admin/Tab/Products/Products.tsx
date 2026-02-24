@@ -5,19 +5,25 @@ import { LayoutGrid, List,  Search } from "lucide-react"; // Modern icons
 import Cardview from "./Tabs/Cardview";
 import TableView from "./Tabs/TableView";
 import { TextController, Typography } from "../../../../../@All/AppForm/Form";
+import { useGetAllProductsQuery } from "./ProductApi";
+import SpinnerLoading from "../../../../../@All/Component/Loading/SpinnerLoading";
 
 const Products = () => {
   const [tab, setTab] = useState(0);
   const { control, watch } = useForm({
     defaultValues: { searchData: "" }
   });
-
+const {  data, isFetching, isLoading } = useGetAllProductsQuery();
   const SearchValue = watch("searchData");
 
   const tabs = [
     { id: 0, label: "Card View", icon: <LayoutGrid size={16} /> },
     { id: 1, label: "Table View", icon: <List size={16} /> },
   ];
+
+  if(isFetching || isLoading){
+    return <SpinnerLoading/>
+  }
 
   return (
     <div className="p-8 bg-[#F8FAFC] min-h-screen">
@@ -59,8 +65,8 @@ const Products = () => {
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`relative flex items-center gap-2 px-6 py-2 rounded-xl text-sm font-bold transition-colors duration-300 ${
-              tab === t.id ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
+            className={`relative flex cursor-pointer items-center gap-2 px-6 py-2 rounded-xl text-sm font-bold transition-colors duration-300 ${
+              tab === t.id ? "text-[var(--main-web-color)]" : "text-slate-500 hover:text-slate-700"
             }`}
           >
             {tab === t.id && (
@@ -87,7 +93,7 @@ const Products = () => {
           {tab === 0 ? (
             <Cardview key="cards" searchData={SearchValue} />
           ) : (
-            <TableView key="table"  />
+            <TableView key="table" data={data} />
           )}
         </AnimatePresence>
       </motion.div>

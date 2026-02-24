@@ -3,15 +3,18 @@ import { FaTruck, FaShieldAlt, FaLock } from "react-icons/fa";
 import { SiRazorpay } from "react-icons/si";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 
 // Hooks and Components
 import { useCreateOrderMutation, useVerifyPaymentMutation } from "./CheckOutAPi";
 import { useGetAllCartQuery } from "../../CartApi/CartApi";
-import { useDefaultAddressQuery } from "../../../Addresses/AddressesApi";
+import { useDefaultAddressQuery, useGetAddressQuery } from "../../../Addresses/AddressesApi";
 import { Typography } from "../../../../AppForm/Form";
 import PaymentSuccessNotification from "../../../../AppForm/SuccessNotification";
 import SpinnerLoading from "../../../Loading/SpinnerLoading";
+import CardAdress from "../../CartAdress/CardAdress";
+import toast from "react-hot-toast";
+
 
 type PaymentMethod = "COD" | "RAZORPAY";
 
@@ -27,8 +30,8 @@ const CheckOut = () => {
   const [total, setTotal] = useState<number>(0);
   const [finalTotal, setFinal] = useState<number>(0);
   const [notification, setNotification] = useState(false);
-
-  // API Queries
+  const { data: Alladdress } = useGetAddressQuery();
+ 
   const { data: CartProducts } = useGetAllCartQuery();
   const { data: DefaultAddress } = useDefaultAddressQuery();
   const [createOrder, { isLoading }] = useCreateOrderMutation();
@@ -38,7 +41,7 @@ const CheckOut = () => {
   const address = DefaultAddress?.address;
 
   const deliveryFee = 20;
-  const discount = 100;
+  const discount = 10;
 
   useEffect(() => {
     if (!CartProducts?.cart?.items) return;
@@ -66,6 +69,21 @@ const CheckOut = () => {
 
   const handleRazorpayPayment = async () => {
     try {
+
+      if (!Alladdress?.addresses || Alladdress.addresses.length === 0) {
+      toast("Please set a delivery address first!", {
+        icon: "🍦",
+        style: {
+          borderRadius: "15px",
+         background: "#32AAF0",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+
+
+
       const loaded = await loadRazorpay();
       if (!loaded) {
         toast.error("Razorpay SDK failed to load");
@@ -78,7 +96,9 @@ const CheckOut = () => {
         paymentMethod,
         deliveryFee,
         discount,
-      }).unwrap();
+      }).unwrap()
+     
+      
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -107,12 +127,26 @@ const CheckOut = () => {
       const razorpay = new window.Razorpay(options);
       razorpay.open();
     } catch (err: any) {
+     
+      
       toast.error(err?.data?.message || "Payment Initialization Failed");
     }
   };
 
   const handleCod = async () => {
     try {
+
+           if (!Alladdress?.addresses || Alladdress.addresses.length === 0) {
+      toast("Please set a delivery address first!", {
+        icon: "🍦",
+        style: {
+          borderRadius: "15px",
+          background: "#32AAF0",
+          color: "#fff",
+        },
+      });
+      return;
+    }
       await createOrder({
         items,
         address,
@@ -129,7 +163,7 @@ const CheckOut = () => {
   };
 
   return (
-    <div className="bg-[var(--main-web-color)] ">
+    <div className="bg-[var(--main-bg-color)] ">
       {/* Success Overlay */}
       <AnimatePresence>
         {notification && (
@@ -147,7 +181,7 @@ const CheckOut = () => {
           {/* LEFT SECTION: PAYMENT METHODS */}
           <div className="space-y-8 flex flex-col">
             <header className=" flex flex-col" >
-              <Typography className="text-4xl md:text-5xl font-black text-[var(--main-bg-color)] tracking-tighter">
+              <Typography className="text-4xl md:text-5xl font-black text-[var(--main-web-color)] tracking-tighter">
                 Final <span className="text-[var(--main-web-color-2)]">Scoop.</span>
               </Typography>
               <Typography className="text-gray-400 font-medium mt-2">
@@ -156,6 +190,7 @@ const CheckOut = () => {
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+             
               {[
                 { id: "RAZORPAY", title: "Online", sub: "Cards, UPI, Netbanking", icon: <SiRazorpay size={24} /> },
                 { id: "COD", title: "Cash on Delivery", sub: "Pay at your doorstep", icon: <FaTruck size={24} /> }
@@ -188,20 +223,9 @@ const CheckOut = () => {
             </div>
 
             {/* Address Preview Card */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-[var(--main-web-color)]">
-                  <FaShieldAlt size={20} />
-                </div>
-                <div>
-                  <Typography className="text-xs font-black text-gray-400 uppercase tracking-widest">Delivering To</Typography>
-                  <Typography className="font-bold text-gray-800 line-clamp-1">
-                    {address ? `${address.street}, ${address.city}` : "No Address Selected"}
-                  </Typography>
-                </div>
-              </div>
-              <button onClick={() => navigate("/cart")} className="text-[var(--main-web-color)] font-black text-[12px] cursor-pointer uppercase underline tracking-widest"><Typography>Change</Typography></button>
-            </div>
+       <motion.div >
+               <CardAdress />
+            </motion.div>
           </div>
 
           {/* RIGHT SECTION: ORDER SUMMARY */}

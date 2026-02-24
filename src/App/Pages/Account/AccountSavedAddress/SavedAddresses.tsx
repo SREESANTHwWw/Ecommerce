@@ -14,7 +14,9 @@ import CommonAlert from "../../../../@All/AppForm/CommonAlert";
 import PreviousButton from "../../../../@All/Component/CommonButtons/PreviousButton";
 
 const SavedAddresses = () => {
-  const { data: address, isLoading, refetch } = useGetUserAddressesQuery();
+  const { data: address, isLoading, refetch } = useGetUserAddressesQuery(undefined,{
+    refetchOnMountOrArgChange:true
+  });
   const [deleteAddress] = useDeleteAddressMutation();
 
   const [addressAdd, setshowAddForm] = useState(false);

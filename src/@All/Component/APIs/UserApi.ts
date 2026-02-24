@@ -19,8 +19,14 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
 
-    getAllUsers: builder.query<any, void>({
-      query: () => "/users",
+    getAllUsers: builder.query<
+      any,
+      { page?: number; limit?: number; search?: string , role?: string , status?: string}
+    >({
+      query: ({ page = 1, limit = 10, search = "" , role = "" , status = ""}) => ({
+        url: "/users",
+        params: { page, limit, search , role , status },
+      }),
       providesTags: ["User"],
     }),
 
@@ -29,12 +35,14 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
 
-    
-    updateMe: builder.mutation<any, Partial<{
-      firstname: string;
-      lastname: string;
-      username: string;
-    }>>({
+    updateMe: builder.mutation<
+      any,
+      Partial<{
+        firstname: string;
+        lastname: string;
+        username: string;
+      }>
+    >({
       query: (body) => ({
         url: "/users/edit",
         method: "PATCH",
@@ -44,7 +52,6 @@ export const userApi = createApi({
     }),
   }),
 });
-
 
 export const {
   useGetMeQuery,

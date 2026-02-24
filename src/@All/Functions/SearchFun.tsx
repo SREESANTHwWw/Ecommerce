@@ -1,15 +1,22 @@
 import { useMemo } from "react";
 import { useGetAllProductsQuery } from "../../App/Pages/Admin/Tab/Products/ProductApi";
+import { useDebounce } from "./Hooks/Debounce";
 
-export const SearchFun = ( searchData = ""  ) => {
+
+export const SearchFun = (searchData = "") => {
   const { data: products } = useGetAllProductsQuery();
 
-  const filterData = useMemo(() => {
-    if (!products?.products) return [];
+  const debouncedSearch = useDebounce(searchData, 400);
 
-    return products?.products.filter((item: any) =>
-      item.productName.toLowerCase().includes(searchData.toLowerCase())
+  const filterData = useMemo(() => {
+    if (!products?.products || !debouncedSearch) return products?.products || [];
+
+    return products.products.filter((item: any) =>
+      item.productName
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase())
     );
-  }, [searchData, products]);
+  }, [debouncedSearch, products]);
+
   return filterData;
 };

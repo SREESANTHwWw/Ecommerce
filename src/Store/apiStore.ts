@@ -10,6 +10,8 @@ import { AddressesApi } from "../@All/Component/Addresses/AddressesApi";
 import { CheckOutapi } from "../@All/Component/Cart/CartPayment/CheckOut/CheckOutAPi";
 import { userApi } from "../@All/Component/APIs/UserApi";
 import { HealthApi } from "../@All/Component/APIs/HealthApi";
+import { OrderApi } from "../@All/Component/APIs/OrdersApi";
+
 export const store = configureStore({
   reducer: {
     RegisterData: FormReducer,
@@ -24,7 +26,9 @@ export const store = configureStore({
     [AddressesApi.reducerPath]: AddressesApi.reducer,
      [CheckOutapi.reducerPath]: CheckOutapi.reducer,
      [userApi.reducerPath]: userApi.reducer,
-     [HealthApi.reducerPath]: HealthApi.reducer
+     [HealthApi.reducerPath]: HealthApi.reducer,
+     [OrderApi.reducerPath]: OrderApi.reducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -35,7 +39,9 @@ export const store = configureStore({
       .concat(AddressesApi.middleware)
       .concat(CheckOutapi.middleware)
       .concat(userApi.middleware)
-      .concat(HealthApi.middleware),
+      .concat(HealthApi.middleware)
+      .concat(OrderApi.middleware)
+      
 });
 
 

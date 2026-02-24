@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import CardAdress from "./CartAdress/CardAdress";
+
 import CartProducts from "./CartProducts/CartProducts";
 import CartPayment from "./CartPayment/CartPayment";
 import { Typography } from "../../AppForm/Form";
@@ -33,12 +33,12 @@ const Cart = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="bg-[#FAFAFA] min-h-screen pb-20"
+      className="bg-[#FAFAFA] min-h-screen pb10"
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-10 py-5">
+      <div className="max-w-7xl mx-auto px-4 lg:px-10 py-1">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
           <div className="flex flex-col gap-3">
             <button 
               onClick={() => navigate(-1)}
@@ -64,10 +64,7 @@ const Cart = () => {
           
           {/* Left Side: Details & Products */}
           <div className="flex flex-col gap-8">
-            <motion.div variants={itemVariants}>
-               <CardAdress />
-            </motion.div>
-
+         
             <motion.div 
               variants={itemVariants}
               className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-50 overflow-hidden"

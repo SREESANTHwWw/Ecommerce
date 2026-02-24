@@ -21,7 +21,7 @@ const AcOrderDisplay = ({ Orders = [] }: any) => {
 
   if (Orders.length === 0) {
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 flex flex-col bg-white rounded-3xl border border-dashed border-gray-200">
         <Package size={48} className="mx-auto text-gray-300 mb-4" />
         <Typography className="text-lg font-bold text-gray-800">No orders yet</Typography>
         <Typography className="text-sm text-gray-500">When you buy items, they will appear here.</Typography>

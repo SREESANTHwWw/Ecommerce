@@ -108,36 +108,36 @@ const Cardview = ({ searchData }: any) => {
                     <Typography className="text-lg font-bold text-gray-800 truncate leading-tight">
                       {product.productName}
                     </Typography>
-                    <div className="flex items-center gap-1 text-blue-600 font-bold">
+                    <div className="flex items-center gap-1 text-[var(--main-web-color)] font-bold">
                       <span className="text-xs">₹</span>
-                      <span className="text-xl">{product.productPrice}</span>
+                      <Typography className="text-xl">{product.productPrice}</Typography>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-500 line-clamp-2 min-h-[40px] mb-4">
+                  <Typography className="text-sm text-gray-500 line-clamp-2 min-h-[40px] mb-4">
                     {product.productDescription}
-                  </p>
+                  </Typography>
 
                   <div className="flex items-center gap-4 text-xs font-medium text-gray-400 border-t pt-4">
-                    <span className="flex items-center gap-1">
+                    <Typography className="flex items-center gap-1">
                       <FaBox className="text-gray-300" /> {product.productStock} left
-                    </span>
-                    <span className="flex items-center gap-1 uppercase tracking-tighter">
+                    </Typography>
+                    <Typography className="flex items-center gap-1 uppercase tracking-tighter">
                       <FaTag className="text-gray-300" /> ID: {product._id.slice(-5)}
-                    </span>
+                    </Typography>
                   </div>
 
                   {/* Action Buttons Overlay / Footer */}
                   <div className="mt-5 flex gap-2">
                     <button
                       onClick={() => navigate(`/admin/edit/${product._id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-gray-200"
+                      className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[var(--main-web-color)]  text-white rounded-xl text-sm font-semibold hover:bg-[var(--main-web-color-2)] cursor-pointer transition-colors shadow-lg shadow-gray-200"
                     >
                       <FaEdit /> Edit
                     </button>
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="w-12 flex items-center justify-center py-2.5 border border-red-100 text-red-500 rounded-xl hover:bg-red-50 hover:border-red-200 transition-colors"
+                      className="w-12 flex items-center justify-center py-2.5 cursor-pointer border border-red-100 text-red-500 rounded-xl hover:bg-red-50 hover:border-red-200 transition-colors"
                     >
                       <FaTrash size={14} />
                     </button>

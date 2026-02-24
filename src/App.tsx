@@ -7,7 +7,7 @@ const Login = lazy(() => import("./@All/Component/Login/Login"));
 const ForgotPassword = lazy(
   () => import("./@All/Component/Login/ForgotPassword"),
 );
-const Admin = lazy(() => import("./App/Pages/Admin/Admin"));
+
 const Signuping = lazy(() => import("./@All/Component/SignUp/Signuping"));
 const IntroPage = lazy(() => import("./@All/Component/SignUp/IndroPage"));
 const TermsPage = lazy(() => import("./App/Pages/Terms/TermPage"));
@@ -30,6 +30,13 @@ import UserProfile from "./App/Pages/Account/AccountProfile/UserProfile";
 import SavedAddresses from "./App/Pages/Account/AccountSavedAddress/SavedAddresses";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./@All/Component/Loading/NotFound";
+import AdminLayout from "./App/Pages/Admin/Admin";
+import OrderManagement from "./App/Pages/Admin/Tab/AdminOrders/OrderManagement";
+import UserManagement from "./App/Pages/Admin/Tab/AdminUsers/UserManagement";
+import Products from "./App/Pages/Admin/Tab/Products/Products";
+import DashBord from "./App/Pages/Admin/Tab/dashBorad/DashBoard";
+import AddCategory from "./App/Pages/Admin/Tab/AdminCategory/AddCatgory/AddCategory";
+import AddPoductForm from "./App/Pages/Admin/Tab/Products/AddProduct/AddPoductForm";
 // import AccountPayment from "./App/Pages/Account/AccountPayment/AccountPayment";
 
 function App() {
@@ -45,20 +52,20 @@ function App() {
               <Route path="/register" element={<Signuping />} />
               <Route path="/viewproduct/:id" element={<ViewProduct />} />
               <Route path="/about" element={<AboutUs />} />
-               <Route path="/contact" element={<ContactPage/>} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="account" element={<Account />}>
                 <Route index element={<Navigate to="overview" replace />} />
                 <Route path="overview" element={<OverView />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="coupons" element={<ComingSoon />} />
                 <Route path="rewards" element={<ComingSoon />} />
-                <Route path="profile" element={<UserProfile/>} />
+                <Route path="profile" element={<UserProfile />} />
                 <Route path="address" element={<SavedAddresses />} />
                 {/* <Route path="payment" element={<AccountPayment />} /> */}
                 <Route path="delete" element={<ComingSoon />} />
               </Route>
             </Route>
-            <Route path="*" element={<NotFound/>} />
+            <Route path="*" element={<NotFound />} />
 
             <Route path="/cart" element={<CartLayout />}>
               <Route index element={<Cart />} />
@@ -71,21 +78,22 @@ function App() {
 
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            <Route
-              path="/admin/*"
-              element={
-                <AdminProtectedRoute>
-                  <Admin />
-                </AdminProtectedRoute>
-              }
-            />
+            <Route element={<AdminProtectedRoute />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<DashBord />} />
+                <Route path="orders" element={<OrderManagement />} />
+                <Route path="users" element={<UserManagement />} />
+                <Route path="products" element={<Products />} />
+                <Route path="category" element={<AddCategory/>} />
+                <Route path="products/add" element={<AddPoductForm/>} />
+                <Route path="settings" element={<ComingSoon />} />
+                <Route path="logout" element={<ComingSoon />} />
+              </Route>
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
-    <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
